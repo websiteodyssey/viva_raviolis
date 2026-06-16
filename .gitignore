@@ -1,0 +1,8 @@
+# Outils / éditeurs
+.claude/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Fichiers non utilisés par le site
+video_salle2.qt
