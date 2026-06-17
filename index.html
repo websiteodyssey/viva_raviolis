@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>裕禧 VIVA RAVIOLIS — Restaurant Chinois · Raviolis & Cuisine du Sichuan · Paris 9e</title>
+<title>VIVA RAVIOLIS — Restaurant Chinois · Raviolis & Cuisine du Sichuan · Paris 9e</title>
 <meta name="description" content="VIVA RAVIOLIS, restaurant chinois au cœur de Paris 9e. Raviolis maison, dim sum, spécialités du Sichuan. Sur place, à emporter & livraison. 57 rue du Faubourg Montmartre." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -99,15 +99,13 @@ h2{text-align:center;font-size:3rem;font-weight:500;color:var(--ink);letter-spac
 .about-imgs .a{width:64%;height:74%;top:0;left:0;z-index:2}
 .about-imgs .b{width:52%;height:58%;bottom:0;right:0;border:6px solid var(--paper);z-index:3}
 .about-video-wrap{position:relative;border-radius:14px;overflow:hidden;box-shadow:var(--shadow-hover)}
-.about-video-wrap video{display:block;width:100%;height:500px;object-fit:cover;background:#1a1110;filter:saturate(1.35) contrast(1.12) brightness(1.02) sepia(.24) hue-rotate(-10deg)}
-.about-video-wrap::before{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;mix-blend-mode:multiply;
-  background:
-    radial-gradient(130% 100% at 50% 32%,transparent 42%,rgba(34,14,8,.58) 100%),
-    linear-gradient(160deg,rgba(224,168,74,.30),rgba(227,200,132,.04) 50%,rgba(120,22,18,.30))}
+.about-video-wrap video{display:block;width:100%;height:500px;object-fit:cover;background:#1a1110;filter:saturate(1.14) contrast(1.07) brightness(1.04) sepia(.05)}
+.about-video-wrap::before{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:radial-gradient(120% 100% at 50% 42%,transparent 62%,rgba(20,12,8,.22) 100%)}
 .about-video-wrap::after{content:"";position:absolute;inset:12px;border:1px solid rgba(227,200,132,.55);border-radius:8px;pointer-events:none;z-index:3}
 .about-video-badge{position:absolute;left:22px;bottom:18px;z-index:4;color:#fff;font-family:'Cormorant Garamond',serif;font-size:1.25rem;letter-spacing:1px;text-shadow:0 2px 14px rgba(0,0,0,.75)}
 .about-video-badge .zh{color:var(--gold-soft);font-size:1rem;margin-right:6px}
-@media(max-width:680px){.about-video-wrap video{height:320px}}
+@media(max-width:680px){.about-video-wrap video{height:230px}}
 .feat-row{display:flex;gap:34px;margin-top:34px;flex-wrap:wrap}
 .feat{flex:1;min-width:130px}
 .feat .n{font-family:'Cormorant Garamond',serif;font-size:2.6rem;color:var(--gold);line-height:1}
@@ -123,6 +121,15 @@ h2{text-align:center;font-size:3rem;font-weight:500;color:var(--ink);letter-spac
 @media(prefers-reduced-motion:reduce){.reel-track{animation:none}}
 @media(max-width:900px){.reel{height:440px}.reel-track .slide{width:74vw}.info-cards{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:680px){.reel{height:300px}.reel-track .slide{width:84vw;margin-right:12px}}
+
+/* ===== SALLE (video showcase) ===== */
+#salle{background:var(--bg-soft)}
+.salle-video{position:relative;max-width:940px;margin:0 auto;border-radius:14px;overflow:hidden;box-shadow:var(--shadow-hover)}
+.salle-video video{display:block;width:100%;height:520px;object-fit:cover;filter:saturate(1.16) contrast(1.05) brightness(1.03) sepia(.08)}
+.salle-video::after{content:"";position:absolute;inset:14px;border:1px solid rgba(201,162,75,.5);border-radius:8px;pointer-events:none;z-index:3}
+.salle-video .salle-badge{position:absolute;left:22px;bottom:18px;z-index:4;color:#fff;font-family:'Cormorant Garamond',serif;font-size:1.25rem;letter-spacing:1px;text-shadow:0 2px 14px rgba(0,0,0,.75)}
+.salle-video .salle-badge .zh{color:var(--gold-soft);font-size:1rem;margin-right:6px}
+@media(max-width:680px){.salle-video video{height:220px}}
 
 /* ===== MENU ===== */
 #menu{background:var(--bg-soft)}
@@ -146,7 +153,8 @@ h2{text-align:center;font-size:3rem;font-weight:500;color:var(--ink);letter-spac
 .dish{padding:16px 0;border-bottom:1px dashed var(--border)}
 .dish-top{display:flex;align-items:baseline;gap:12px}
 .dish-name{font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--ink);font-weight:500}
-.dish-name .zh{font-size:.95rem;color:var(--red);font-weight:600;margin-left:6px}
+.dish-name .zh{font-size:.95rem;color:var(--red);font-weight:600}
+.dish-name .dish-meta{white-space:nowrap}
 .dots{flex:1;border-bottom:1px dotted #cdbfa8;transform:translateY(-5px)}
 .dish-price{font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--gold);font-weight:600;white-space:nowrap}
 .dish-desc{font-size:.84rem;color:var(--text-light);margin-top:4px;line-height:1.6}
@@ -213,12 +221,23 @@ footer ul a:hover{color:var(--gold-soft)}
 }
 @media(max-width:680px){
   .container{padding:0 20px}
-  .sec-pad{padding:80px 0}
+  .sec-pad{padding:52px 0}
+  .lead{margin-bottom:32px}
+  #about .about-grid{gap:28px}
+  #about .about-text p{margin-bottom:12px}
   .hero-content h1{font-size:3.1rem;letter-spacing:3px}
   .hero-content .zh{font-size:1.6rem}
   .hero-content p{font-size:.95rem;letter-spacing:2px}
   h2{font-size:2.2rem}
-  .menu-cols,.info-cards{grid-template-columns:1fr;gap:14px 0}
+  .menu-cols{grid-template-columns:1fr;gap:14px 0}
+  .info-cards{grid-template-columns:repeat(2,1fr);gap:12px}
+  .info-cards>.info-card:first-child,.info-cards>.info-card:last-child{grid-column:1/-1}
+  .info-card{padding:20px 18px}
+  .info-card .ic{margin-bottom:8px}
+  .info-card h4{margin-bottom:10px}
+  .map-wrap{margin-top:16px}
+  .map-wrap iframe{height:200px}
+  .dish-name .dish-meta{display:block;margin-top:3px;white-space:normal}
   .foot-grid{grid-template-columns:1fr;gap:30px}
   .strip{padding:20px 0}
   .strip .container{grid-template-columns:repeat(2,1fr);gap:16px 12px}
@@ -235,7 +254,7 @@ footer ul a:hover{color:var(--gold-soft)}
 <!-- NAV -->
 <nav id="nav">
   <div class="nav-inner">
-    <a href="#hero" class="logo"><span class="zh">裕禧</span><span class="name">Viva Raviolis</span></a>
+    <a href="#hero" class="logo"><span class="name">Viva Raviolis</span></a>
     <ul>
       <li><a href="#gallery">Galerie</a></li>
       <li><a href="#menu">La carte</a></li>
@@ -266,7 +285,6 @@ footer ul a:hover{color:var(--gold-soft)}
 <header id="hero">
   <div class="hero-content">
     <div class="hero-eyebrow">Restaurant Chinois · Paris 9ᵉ</div>
-    <span class="zh">裕禧</span>
     <h1>Viva Raviolis</h1>
     <p>Raviolis maison, dim sum & spécialités du Sichuan, au cœur du Faubourg Montmartre</p>
     <div class="hero-btns">
@@ -325,7 +343,7 @@ footer ul a:hover{color:var(--gold-soft)}
     <div class="about-grid">
       <div class="about-text reveal">
         <h3>Toute la richesse de la cuisine chinoise</h3>
-        <p>Chez <strong>裕禧 Viva Raviolis</strong>, nos raviolis et dim sum faits maison — porc et ciboulette, crevettes royales, gyoza, bao laqués — ne sont que le début. Notre carte déploie une cuisine chinoise complète et généreuse.</p>
+        <p>Chez <strong>Viva Raviolis</strong>, nos raviolis et dim sum faits maison — porc et ciboulette, crevettes royales, gyoza, bao laqués — ne sont que le début. Notre carte déploie une cuisine chinoise complète et généreuse.</p>
         <p>Woks <strong>Mala Xiang Guo</strong>, fondues et hot pots à partager, poissons grillés signature, plats sautés, spécialités épicées du <strong>Sichuan</strong>, soupes, nouilles et riz parfumés : une table conviviale où chacun trouve son bonheur, du plus doux au plus relevé.</p>
         <p class="sign">« Une cuisine franche et généreuse, à partager autour de la table. »</p>
         <div class="feat-row">
@@ -336,11 +354,27 @@ footer ul a:hover{color:var(--gold-soft)}
       </div>
       <div class="about-video-wrap reveal">
         <video autoplay muted loop playsinline preload="metadata">
-          <source src="image_videos/video_salle.mp4" type="video/mp4">
-          <source src="image_videos/video_salle.qt" type="video/quicktime">
+          <source src="image_videos/xiaolongbao.mp4" type="video/mp4">
         </video>
-        <span class="about-video-badge"><span class="zh">餐厅</span>Notre salle</span>
+        <span class="about-video-badge"><span class="zh">小笼包</span>Faits maison</span>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- SALLE -->
+<section id="salle" class="sec-pad">
+  <div class="container">
+    <p class="eyebrow reveal">Bienvenue chez nous</p>
+    <h2 class="reveal">Notre salle</h2>
+    <div class="h2-rule reveal"></div>
+    <div class="lead reveal">Une atmosphère chaleureuse et conviviale, au cœur du Faubourg Montmartre — l'endroit idéal pour partager raviolis, woks et fondues, entre amis ou en famille.</div>
+    <div class="salle-video reveal">
+      <video autoplay muted loop playsinline preload="metadata">
+        <source src="image_videos/video_salle.mp4" type="video/mp4">
+        <source src="image_videos/video_salle.qt" type="video/quicktime">
+      </video>
+      <span class="salle-badge"><span class="zh">餐厅</span>Notre salle</span>
     </div>
   </div>
 </section>
@@ -396,7 +430,6 @@ footer ul a:hover{color:var(--gold-soft)}
 <!-- CTA BAND -->
 <section id="cta">
   <div class="container">
-    <span class="zh">裕禧</span>
     <h2>Réservez votre table</h2>
     <p>Venez partager raviolis maison et spécialités du Sichuan dans une ambiance conviviale.</p>
     <div class="hero-btns" style="opacity:1;animation:none">
@@ -411,7 +444,7 @@ footer ul a:hover{color:var(--gold-soft)}
   <div class="container">
     <div class="foot-grid">
       <div>
-        <a href="#hero" class="logo"><span class="zh">裕禧</span><span class="name">Viva Raviolis</span></a>
+        <a href="#hero" class="logo"><span class="name">Viva Raviolis</span></a>
         <p>Restaurant chinois · Raviolis maison, dim sum & cuisine du Sichuan, au cœur de Paris 9ᵉ. Une cuisine authentique, généreuse et conviviale.</p>
       </div>
       <div>
@@ -434,7 +467,7 @@ footer ul a:hover{color:var(--gold-soft)}
       </div>
     </div>
     <div class="foot-bottom">
-      © 2026 裕禧 Viva Raviolis. Tous droits réservés. · <a href="#">Mentions légales</a> · <a href="#">Politique de confidentialité</a>
+      © 2026 Viva Raviolis. Tous droits réservés. · <a href="#">Mentions légales</a> · <a href="#">Politique de confidentialité</a>
     </div>
   </div>
 </footer>
@@ -458,9 +491,9 @@ const MENU=[
     {n:"Gyoza au poulet", zh:"6 pcs · 鸡饺", p:"6,80 €"},
     {n:"Gyoza végétarien", zh:"6 pcs · 素饺", p:"6,80 €"},
     {n:"Bao au porc laqué vapeur", p:"6,00 €"},
-    {n:"Brioche au bœuf grillé", zh:"6 pcs", p:"8,80 €"},
-    {n:"Brioche au bœuf", zh:"4 pcs", p:"4,80 €"},
-    {n:"Brioche au porc", zh:"1 pc", p:"2,00 €"},
+    {n:"Brioche au bœuf grillé, faite maison", zh:"6 pcs", p:"8,80 €"},
+    {n:"Brioche au bœuf, faite maison", zh:"4 pcs", p:"4,80 €"},
+    {n:"Xiaolongbao faits maison", zh:"小笼包 · 6 pcs", p:"7,80 €", d:"Raviolis vapeur à la soupe, notre signature."},
     {n:"Tempura de crevettes frites", zh:"4 pcs", p:"6,80 €"},
     {n:"Bouchées aux crevettes", p:"5,80 €"},
     {n:"Nems", p:"5,80 €"},
@@ -726,11 +759,12 @@ const MENU=[
 
 function dishHTML(it){
   if(it.sub) return '<div class="menu-cat-title">'+it.sub+'</div>';
-  const spice=it.s?' <span class="spice">'+'🌶️'.repeat(it.s)+'</span>':'';
-  const zh=it.zh?' <span class="zh">'+it.zh+'</span>':'';
+  const spice=it.s?'<span class="spice">'+'🌶️'.repeat(it.s)+'</span>':'';
+  const zh=it.zh?'<span class="zh">'+it.zh+'</span>':'';
+  const meta=(zh||spice)?' <span class="dish-meta">'+zh+(zh&&spice?' ':'')+spice+'</span>':'';
   const price=it.p?'<span class="dots"></span><span class="dish-price">'+it.p+'</span>':'';
   const desc=it.d?'<div class="dish-desc">'+it.d+'</div>':'';
-  return '<div class="dish"><div class="dish-top"><span class="dish-name">'+it.n+zh+spice+'</span>'+price+'</div>'+desc+'</div>';
+  return '<div class="dish"><div class="dish-top"><span class="dish-name">'+it.n+meta+'</span>'+price+'</div>'+desc+'</div>';
 }
 (function renderMenu(){
   const tabsEl=document.getElementById('menuTabs'),panelsEl=document.getElementById('menuPanels');
