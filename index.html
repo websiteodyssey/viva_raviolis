@@ -41,15 +41,24 @@ nav.scrolled{background:rgba(26,17,16,.96);backdrop-filter:blur(14px);padding:10
 .logo{display:flex;align-items:baseline;gap:10px;color:#fff;flex-shrink:0}
 .logo .zh{font-size:1.5rem;color:var(--gold-soft);font-weight:700;letter-spacing:2px}
 .logo .name{font-family:'Cormorant Garamond',serif;font-size:1.45rem;letter-spacing:3px;font-weight:600;text-transform:uppercase}
-nav ul{list-style:none;display:flex;gap:30px;align-items:center}
+nav ul{list-style:none;display:flex;gap:26px;align-items:center}
 nav ul a{color:rgba(255,255,255,.85);font-size:12px;letter-spacing:1.6px;text-transform:uppercase;font-weight:400;position:relative;padding:4px 0;transition:var(--tr)}
 nav ul a::after{content:"";position:absolute;left:0;bottom:-3px;width:0;height:1px;background:var(--gold);transition:var(--tr)}
 nav ul a:hover{color:var(--gold-soft)}
 nav ul a:hover::after{width:100%}
 .nav-cta{display:inline-block;padding:11px 26px;border:1px solid var(--gold);color:var(--gold-soft);font-size:11px;letter-spacing:2px;text-transform:uppercase;border-radius:2px;transition:var(--tr)}
 .nav-cta:hover{background:var(--gold);color:var(--ink)}
-.nav-right{display:flex;align-items:center;gap:24px}
+.nav-right{display:flex;align-items:center;gap:16px}
 .nav-phone{color:rgba(255,255,255,.9);font-size:13px;letter-spacing:1px;white-space:nowrap}
+.lang-switch{display:flex;align-items:center;gap:0;border:1px solid rgba(227,200,132,.3);border-radius:40px;padding:3px;background:rgba(255,255,255,.04)}
+.lang-switch button{background:none;border:none;cursor:pointer;color:rgba(255,255,255,.6);font-family:'Montserrat',sans-serif;font-size:11px;letter-spacing:.8px;font-weight:500;padding:5px 11px;border-radius:40px;transition:var(--tr);line-height:1}
+.lang-switch button.zh-btn{font-family:'Noto Serif SC',serif;letter-spacing:.5px}
+.lang-switch button:hover{color:var(--gold-soft)}
+.lang-switch button.active{background:var(--gold);color:var(--ink)}
+.mobile-lang{display:flex;gap:14px;margin-top:8px}
+.mobile-lang button{background:none;border:1px solid rgba(255,255,255,.25);color:#fff;font-family:'Montserrat',sans-serif;font-size:13px;letter-spacing:1.5px;padding:8px 16px;border-radius:4px;cursor:pointer;transition:var(--tr)}
+.mobile-lang button.zh-btn{font-family:'Noto Serif SC',serif}
+.mobile-lang button.active{background:var(--gold);color:var(--ink);border-color:var(--gold)}
 .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none}
 .burger span{width:26px;height:2px;background:#fff;transition:var(--tr)}
 
@@ -213,14 +222,19 @@ footer ul a:hover{color:var(--gold-soft)}
 .mobile-menu.open{display:flex}
 .mobile-menu a{color:#fff;font-size:1.3rem;letter-spacing:2px;text-transform:uppercase}
 .mobile-menu .close{position:absolute;top:28px;right:32px;font-size:2rem;color:#fff;background:none;border:none;cursor:pointer}
-@media(max-width:960px){
-  nav ul,.nav-right{display:none}
+@media(max-width:1080px){
+  nav ul{display:none}
+  .nav-right{margin-left:auto;gap:0}
+  .nav-right .nav-cta{display:none}
   .burger{display:flex}
   .about-grid,.info-grid{grid-template-columns:1fr;gap:44px}
   .about-video-wrap{order:-1}
 }
 @media(max-width:680px){
   .container{padding:0 20px}
+  .nav-inner{padding:0 18px;gap:12px}
+  .logo .name{font-size:1.2rem;letter-spacing:2px}
+  .lang-switch button{padding:5px 9px}
   .sec-pad{padding:52px 0}
   .lead{margin-bottom:32px}
   #about .about-grid{gap:28px}
@@ -256,15 +270,17 @@ footer ul a:hover{color:var(--gold-soft)}
   <div class="nav-inner">
     <a href="#hero" class="logo"><span class="name">Viva Raviolis</span></a>
     <ul>
-      <li><a href="#gallery">Galerie</a></li>
-      <li><a href="#menu">La carte</a></li>
-      <li><a href="#about">À propos</a></li>
-      <li><a href="#infos">Infos</a></li>
-      <li><a href="#cta">Contact</a></li>
+      <li><a href="#gallery" data-i18n="nav.gallery">Galerie</a></li>
+      <li><a href="#menu" data-i18n="nav.menu">La carte</a></li>
+      <li><a href="#about" data-i18n="nav.about">À propos</a></li>
+      <li><a href="#infos" data-i18n="nav.infos">Infos</a></li>
+      <li><a href="#cta" data-i18n="nav.contact">Contact</a></li>
     </ul>
     <div class="nav-right">
-      <span class="nav-phone">☎ 01 77 19 55 73</span>
-      <a href="#" onclick="return false" class="nav-cta">Réserver</a>
+      <div class="lang-switch" id="langSwitch">
+        <button data-lang="fr" class="active">FR</button><button data-lang="en">EN</button><button data-lang="zh" class="zh-btn">中文</button>
+      </div>
+      <a href="#" onclick="return false" class="nav-cta" data-i18n="nav.book">Réserver</a>
     </div>
     <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
@@ -273,45 +289,45 @@ footer ul a:hover{color:var(--gold-soft)}
 <!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobileMenu">
   <button class="close" id="closeMenu" aria-label="Fermer">×</button>
-  <a href="#gallery">Galerie</a>
-  <a href="#menu">La carte</a>
-  <a href="#about">À propos</a>
-  <a href="#infos">Infos</a>
-  <a href="#cta">Contact</a>
-  <a href="#" onclick="return false" class="nav-cta">☎ Réserver</a>
+  <a href="#gallery" data-i18n="nav.gallery">Galerie</a>
+  <a href="#menu" data-i18n="nav.menu">La carte</a>
+  <a href="#about" data-i18n="nav.about">À propos</a>
+  <a href="#infos" data-i18n="nav.infos">Infos</a>
+  <a href="#cta" data-i18n="nav.contact">Contact</a>
+  <a href="#" onclick="return false" class="nav-cta">☎ <span data-i18n="nav.book">Réserver</span></a>
 </div>
 
 <!-- HERO -->
 <header id="hero">
   <div class="hero-content">
-    <div class="hero-eyebrow">Restaurant Chinois · Paris 9ᵉ</div>
+    <div class="hero-eyebrow" data-i18n="hero.eyebrow">Restaurant Chinois · Paris 9ᵉ</div>
     <h1>Viva Raviolis</h1>
-    <p>Raviolis maison, dim sum & spécialités du Sichuan, au cœur du Faubourg Montmartre</p>
+    <p data-i18n="hero.sub">Raviolis maison, dim sum & spécialités du Sichuan, au cœur du Faubourg Montmartre</p>
     <div class="hero-btns">
-      <a href="#menu" class="btn btn-gold">Découvrir la carte</a>
-      <a href="#" onclick="return false" class="btn btn-ghost">Réserver une table</a>
+      <a href="#menu" class="btn btn-gold" data-i18n="hero.cta1">Découvrir la carte</a>
+      <a href="#" onclick="return false" class="btn btn-ghost" data-i18n="hero.cta2">Réserver une table</a>
     </div>
   </div>
-  <div class="scroll-cue">Défiler ↓</div>
+  <div class="scroll-cue" data-i18n="hero.scroll">Défiler ↓</div>
 </header>
 
 <!-- INFO STRIP -->
 <div class="strip">
   <div class="container">
-    <div class="item"><span class="k">Note Google</span><span class="v stars">★ 4,7 / 5 · 336 avis</span></div>
-    <div class="item"><span class="k">Spécialité</span><span class="v">Raviolis & Sichuan</span></div>
-    <div class="item"><span class="k">Adresse</span><span class="v">57 r. du Faubourg Montmartre, 75009</span></div>
-    <div class="item"><span class="k">Service</span><span class="v">Sur place · Emporter · Livraison</span></div>
+    <div class="item"><span class="k" data-i18n="strip.k1">Note Google</span><span class="v stars" data-i18n="strip.v1">★ 4,7 / 5 · 336 avis</span></div>
+    <div class="item"><span class="k" data-i18n="strip.k2">Spécialité</span><span class="v" data-i18n="strip.v2">Raviolis & Sichuan</span></div>
+    <div class="item"><span class="k" data-i18n="strip.k3">Adresse</span><span class="v">57 r. du Faubourg Montmartre, 75009</span></div>
+    <div class="item"><span class="k" data-i18n="strip.k4">Service</span><span class="v" data-i18n="strip.v4">Sur place · Emporter · Livraison</span></div>
   </div>
 </div>
 
 <!-- GALLERY -->
 <section id="gallery" class="sec-pad">
   <div class="container">
-    <p class="eyebrow reveal">En images</p>
-    <h2 class="reveal">Nos plats</h2>
+    <p class="eyebrow reveal" data-i18n="gallery.eyebrow">En images</p>
+    <h2 class="reveal" data-i18n="gallery.title">Nos plats</h2>
     <div class="h2-rule reveal"></div>
-    <div class="lead reveal">Découvrez nos plats signatures, où chaque assiette raconte une histoire de raviolis maison et de saveurs du Sichuan.</div>
+    <div class="lead reveal" data-i18n="gallery.lead">Découvrez nos plats signatures, où chaque assiette raconte une histoire de raviolis maison et de saveurs du Sichuan.</div>
     <div class="reel reveal"><div class="reel-track" id="reelTrack"></div></div>
   </div>
 </section>
@@ -319,16 +335,16 @@ footer ul a:hover{color:var(--gold-soft)}
 <!-- MENU -->
 <section id="menu" class="sec-pad">
   <div class="container">
-    <p class="eyebrow reveal">Nos plats</p>
-    <h2 class="reveal">La carte</h2>
+    <p class="eyebrow reveal" data-i18n="menu.eyebrow">Nos plats</p>
+    <h2 class="reveal" data-i18n="menu.title">La carte</h2>
     <div class="h2-rule reveal"></div>
-    <div class="lead reveal">Une sélection de nos spécialités. <span class="spice">🌶️</span> indique les plats épicés. Carte complète disponible sur place et en ligne.</div>
+    <div class="lead reveal" data-i18n="menu.lead">Une sélection de nos spécialités. <span class="spice">🌶️</span> indique les plats épicés. Carte complète disponible sur place et en ligne.</div>
 
     <div class="menu-card reveal">
     <div class="menu-tabs" id="menuTabs"></div>
     <div id="menuPanels"></div>
 
-    <p class="menu-note">Carte non exhaustive · Prix nets en euros, taxes et service compris. Menus déjeuner servis du lundi au vendredi (11h–15h).</p>
+    <p class="menu-note" data-i18n="menu.note">Carte non exhaustive · Prix nets en euros, taxes et service compris. Menus déjeuner servis du lundi au vendredi (11h–15h).</p>
     </div>
   </div>
 </section>
@@ -336,27 +352,27 @@ footer ul a:hover{color:var(--gold-soft)}
 <!-- ABOUT -->
 <section id="about" class="sec-pad">
   <div class="container">
-    <p class="eyebrow reveal">À propos de nous</p>
-    <h2 class="reveal">Bien plus que des raviolis</h2>
+    <p class="eyebrow reveal" data-i18n="about.eyebrow">À propos de nous</p>
+    <h2 class="reveal" data-i18n="about.title">Bien plus que des raviolis</h2>
     <div class="h2-rule reveal"></div>
-    <div class="lead reveal">Si nos raviolis faits maison ont fait notre réputation, notre carte déploie tout le répertoire de la cuisine chinoise — une table généreuse à partager dans une salle chaleureuse.</div>
+    <div class="lead reveal" data-i18n="about.lead">Si nos raviolis faits maison ont fait notre réputation, notre carte déploie tout le répertoire de la cuisine chinoise — une table généreuse à partager dans une salle chaleureuse.</div>
     <div class="about-grid">
       <div class="about-text reveal">
-        <h3>Toute la richesse de la cuisine chinoise</h3>
-        <p>Chez <strong>Viva Raviolis</strong>, nos raviolis et dim sum faits maison — porc et ciboulette, crevettes royales, gyoza, bao laqués — ne sont que le début. Notre carte déploie une cuisine chinoise complète et généreuse.</p>
-        <p>Woks <strong>Mala Xiang Guo</strong>, fondues et hot pots à partager, poissons grillés signature, plats sautés, spécialités épicées du <strong>Sichuan</strong>, soupes, nouilles et riz parfumés : une table conviviale où chacun trouve son bonheur, du plus doux au plus relevé.</p>
-        <p class="sign">« Une cuisine franche et généreuse, à partager autour de la table. »</p>
+        <h3 data-i18n="about.h3">Toute la richesse de la cuisine chinoise</h3>
+        <p data-i18n="about.p1">Chez <strong>Viva Raviolis</strong>, nos raviolis et dim sum faits maison — porc et ciboulette, crevettes royales, gyoza, bao laqués — ne sont que le début. Notre carte déploie une cuisine chinoise complète et généreuse.</p>
+        <p data-i18n="about.p2">Woks <strong>Mala Xiang Guo</strong>, fondues et hot pots à partager, poissons grillés signature, plats sautés, spécialités épicées du <strong>Sichuan</strong>, soupes, nouilles et riz parfumés : une table conviviale où chacun trouve son bonheur, du plus doux au plus relevé.</p>
+        <p class="sign" data-i18n="about.sign">« Une cuisine franche et généreuse, à partager autour de la table. »</p>
         <div class="feat-row">
-          <div class="feat"><div class="n">100+</div><div class="l">Plats à la carte</div></div>
-          <div class="feat"><div class="n">4,7★</div><div class="l">336 avis</div></div>
-          <div class="feat"><div class="n">7j/7</div><div class="l">Midi & soir</div></div>
+          <div class="feat"><div class="n">100+</div><div class="l" data-i18n="about.feat1">Plats à la carte</div></div>
+          <div class="feat"><div class="n">4,7★</div><div class="l" data-i18n="about.feat2">336 avis</div></div>
+          <div class="feat"><div class="n">7j/7</div><div class="l" data-i18n="about.feat3">Midi & soir</div></div>
         </div>
       </div>
       <div class="about-video-wrap reveal">
         <video autoplay muted loop playsinline preload="metadata">
           <source src="image_videos/xiaolongbao.mp4" type="video/mp4">
         </video>
-        <span class="about-video-badge"><span class="zh">小笼包</span>Faits maison</span>
+        <span class="about-video-badge"><span class="zh">小笼包</span><span data-i18n="about.badge">Faits maison</span></span>
       </div>
     </div>
   </div>
@@ -365,16 +381,16 @@ footer ul a:hover{color:var(--gold-soft)}
 <!-- SALLE -->
 <section id="salle" class="sec-pad">
   <div class="container">
-    <p class="eyebrow reveal">Bienvenue chez nous</p>
-    <h2 class="reveal">Notre salle</h2>
+    <p class="eyebrow reveal" data-i18n="salle.eyebrow">Bienvenue chez nous</p>
+    <h2 class="reveal" data-i18n="salle.title">Notre salle</h2>
     <div class="h2-rule reveal"></div>
-    <div class="lead reveal">Une atmosphère chaleureuse et conviviale, au cœur du Faubourg Montmartre — l'endroit idéal pour partager raviolis, woks et fondues, entre amis ou en famille.</div>
+    <div class="lead reveal" data-i18n="salle.lead">Une atmosphère chaleureuse et conviviale, au cœur du Faubourg Montmartre — l'endroit idéal pour partager raviolis, woks et fondues, entre amis ou en famille.</div>
     <div class="salle-video reveal">
       <video autoplay muted loop playsinline preload="metadata">
         <source src="image_videos/video_salle.mp4" type="video/mp4">
         <source src="image_videos/video_salle.qt" type="video/quicktime">
       </video>
-      <span class="salle-badge"><span class="zh">餐厅</span>Notre salle</span>
+      <span class="salle-badge"><span class="zh">餐厅</span><span data-i18n="salle.badge">Notre salle</span></span>
     </div>
   </div>
 </section>
@@ -382,41 +398,41 @@ footer ul a:hover{color:var(--gold-soft)}
 <!-- INFOS PRATIQUES -->
 <section id="infos" class="sec-pad">
   <div class="container">
-    <p class="eyebrow reveal" style="color:var(--gold-soft)">Informations pratiques</p>
-    <h2 class="reveal">Nous trouver & réserver</h2>
+    <p class="eyebrow reveal" style="color:var(--gold-soft)" data-i18n="infos.eyebrow">Informations pratiques</p>
+    <h2 class="reveal" data-i18n="infos.title">Nous trouver & réserver</h2>
     <div class="h2-rule reveal"></div>
-    <div class="lead reveal">Au cœur du 9ᵉ arrondissement, à deux pas des Grands Boulevards.</div>
+    <div class="lead reveal" data-i18n="infos.lead">Au cœur du 9ᵉ arrondissement, à deux pas des Grands Boulevards.</div>
     <div class="info-grid">
       <div class="info-cards reveal">
         <div class="info-card">
           <div class="ic">🕒</div>
-          <h4>Horaires</h4>
-          <div class="row"><span class="day">Lundi – Jeudi</span><span class="time">11h–15h · 17h–23h30</span></div>
-          <div class="row"><span class="day">Vendredi</span><span class="time">11h–23h59</span></div>
-          <div class="row"><span class="day">Samedi</span><span class="time">11h–23h30</span></div>
-          <div class="row"><span class="day">Dimanche</span><span class="time">11h–23h30</span></div>
-          <p style="margin-top:10px;font-size:.82rem">Ouvert 7j/7, midi et soir.</p>
+          <h4 data-i18n="infos.hours">Horaires</h4>
+          <div class="row"><span class="day" data-i18n="infos.monThu">Lundi – Jeudi</span><span class="time">11h–15h · 17h–23h30</span></div>
+          <div class="row"><span class="day" data-i18n="infos.fri">Vendredi</span><span class="time">11h–23h59</span></div>
+          <div class="row"><span class="day" data-i18n="infos.sat">Samedi</span><span class="time">11h–23h30</span></div>
+          <div class="row"><span class="day" data-i18n="infos.sun">Dimanche</span><span class="time">11h–23h30</span></div>
+          <p style="margin-top:10px;font-size:.82rem" data-i18n="infos.open7">Ouvert 7j/7, midi et soir.</p>
         </div>
         <div class="info-card">
           <div class="ic">📍</div>
-          <h4>Adresse</h4>
+          <h4 data-i18n="infos.address">Adresse</h4>
           <p>57 rue du Faubourg Montmartre<br>75009 Paris</p>
-          <p style="margin-top:10px"><a href="https://www.google.com/maps?q=57+Rue+du+Faubourg+Montmartre+75009+Paris" target="_blank" rel="noopener">Itinéraire Google Maps →</a></p>
-          <p style="font-size:.82rem;margin-top:8px">M° Grands Boulevards · Le Peletier</p>
+          <p style="margin-top:10px"><a href="https://www.google.com/maps?q=57+Rue+du+Faubourg+Montmartre+75009+Paris" target="_blank" rel="noopener" data-i18n="infos.directions">Itinéraire Google Maps →</a></p>
+          <p style="font-size:.82rem;margin-top:8px" data-i18n="infos.metro">M° Grands Boulevards · Le Peletier</p>
         </div>
         <div class="info-card">
           <div class="ic">☎</div>
-          <h4>Réservations</h4>
-          <p>Réservez votre table par téléphone :</p>
+          <h4 data-i18n="infos.reservations">Réservations</h4>
+          <p data-i18n="infos.reservDesc">Réservez votre table par téléphone :</p>
           <p style="margin-top:8px"><a href="tel:+33177195573" style="font-size:1.2rem">01 77 19 55 73</a></p>
         </div>
         <div class="info-card">
           <div class="ic">🥡</div>
-          <h4>Services</h4>
+          <h4 data-i18n="infos.services">Services</h4>
           <div class="tags">
-            <span class="tag">Sur place</span>
-            <span class="tag">À emporter</span>
-            <span class="tag">Livraison</span>
+            <span class="tag" data-i18n="infos.tag1">Sur place</span>
+            <span class="tag" data-i18n="infos.tag2">À emporter</span>
+            <span class="tag" data-i18n="infos.tag3">Livraison</span>
           </div>
         </div>
       </div>
@@ -430,11 +446,11 @@ footer ul a:hover{color:var(--gold-soft)}
 <!-- CTA BAND -->
 <section id="cta">
   <div class="container">
-    <h2>Réservez votre table</h2>
-    <p>Venez partager raviolis maison et spécialités du Sichuan dans une ambiance conviviale.</p>
+    <h2 data-i18n="cta.title">Réservez votre table</h2>
+    <p data-i18n="cta.sub">Venez partager raviolis maison et spécialités du Sichuan dans une ambiance conviviale.</p>
     <div class="hero-btns" style="opacity:1;animation:none">
       <a href="tel:+33177195573" class="btn btn-gold">☎ 01 77 19 55 73</a>
-      <a href="#" onclick="return false" class="btn btn-ghost">Réserver</a>
+      <a href="#" onclick="return false" class="btn btn-ghost" data-i18n="cta.book">Réserver</a>
     </div>
   </div>
 </section>
@@ -445,10 +461,10 @@ footer ul a:hover{color:var(--gold-soft)}
     <div class="foot-grid">
       <div>
         <a href="#hero" class="logo"><span class="name">Viva Raviolis</span></a>
-        <p>Restaurant chinois · Raviolis maison, dim sum & cuisine du Sichuan, au cœur de Paris 9ᵉ. Une cuisine authentique, généreuse et conviviale.</p>
+        <p data-i18n="footer.desc">Restaurant chinois · Raviolis maison, dim sum & cuisine du Sichuan, au cœur de Paris 9ᵉ. Une cuisine authentique, généreuse et conviviale.</p>
       </div>
       <div>
-        <h5>Coordonnées</h5>
+        <h5 data-i18n="footer.contact">Coordonnées</h5>
         <ul>
           <li>57 rue du Faubourg Montmartre</li>
           <li>75009 Paris</li>
@@ -457,17 +473,17 @@ footer ul a:hover{color:var(--gold-soft)}
         </ul>
       </div>
       <div>
-        <h5>Navigation</h5>
+        <h5 data-i18n="footer.nav">Navigation</h5>
         <ul>
-          <li><a href="#about">À propos</a></li>
-          <li><a href="#gallery">Galerie</a></li>
-          <li><a href="#menu">La carte</a></li>
-          <li><a href="#infos">Infos & accès</a></li>
+          <li><a href="#about" data-i18n="nav.about">À propos</a></li>
+          <li><a href="#gallery" data-i18n="nav.gallery">Galerie</a></li>
+          <li><a href="#menu" data-i18n="nav.menu">La carte</a></li>
+          <li><a href="#infos" data-i18n="footer.access">Infos & accès</a></li>
         </ul>
       </div>
     </div>
     <div class="foot-bottom">
-      © 2026 Viva Raviolis. Tous droits réservés. · <a href="#">Mentions légales</a> · <a href="#">Politique de confidentialité</a>
+      <span data-i18n="footer.rights">© 2026 Viva Raviolis. Tous droits réservés.</span> · <a href="#" data-i18n="footer.legal">Mentions légales</a> · <a href="#" data-i18n="footer.privacy">Politique de confidentialité</a>
     </div>
   </div>
 </footer>
@@ -485,300 +501,309 @@ mm.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>mm.classList.
 
 // ===== Carte complète — générée à partir des données =====
 const MENU=[
-  {t:"Entrées & Raviolis", items:[
-    {n:"Raviolis au porc & ciboulette chinoise", zh:"10 pcs", p:"8,00 €", d:"Le classique de la maison, plié à la main."},
-    {n:"Raviolis royal aux crevettes", zh:"4 pcs", p:"5,80 €"},
-    {n:"Gyoza au poulet", zh:"6 pcs · 鸡饺", p:"6,80 €"},
-    {n:"Gyoza végétarien", zh:"6 pcs · 素饺", p:"6,80 €"},
-    {n:"Bao au porc laqué vapeur", p:"6,00 €"},
-    {n:"Brioche au bœuf grillé", zh:"6 pcs", p:"8,80 €", d:"Faite maison"},
-    {n:"Brioche au bœuf", zh:"4 pcs", p:"4,80 €", d:"Faite maison"},
-    {n:"Xiaolongbao faits maison", zh:"小笼包 · 6 pcs", p:"7,80 €", d:"Raviolis vapeur à la soupe, notre signature."},
-    {n:"Tempura de crevettes frites", zh:"4 pcs", p:"6,80 €"},
-    {n:"Bouchées aux crevettes", p:"5,80 €"},
-    {n:"Nems", p:"5,80 €"},
-    {n:"Samossas de bœuf au curry frits", p:"5,80 €"},
-    {n:"Assortiment de dim sum frits", zh:"6 pcs", p:"8,80 €"}
+  {t:"Entrées & Raviolis", t_en:"Starters & Dumplings", t_zh:"开胃菜与饺子", items:[
+    {n:"Raviolis au porc & ciboulette chinoise", n_en:"Pork & Chinese Chive Dumplings", n_zh:"猪肉韭菜饺", zh:"10 pcs", p:"8,00 €", d:"Le classique de la maison, plié à la main.", d_en:"Our house classic, hand-folded.", d_zh:"招牌经典，手工现包。"},
+    {n:"Raviolis royal aux crevettes", n_en:"Royal Shrimp Dumplings", n_zh:"鲜虾饺", zh:"4 pcs", p:"5,80 €"},
+    {n:"Gyoza au poulet", n_en:"Chicken Gyoza", n_zh:"鸡肉煎饺", zh:"6 pcs · 鸡饺", p:"6,80 €"},
+    {n:"Gyoza végétarien", n_en:"Vegetable Gyoza", n_zh:"素煎饺", zh:"6 pcs · 素饺", p:"6,80 €"},
+    {n:"Bao au porc laqué vapeur", n_en:"Steamed BBQ Pork Bao", n_zh:"叉烧包", p:"6,00 €"},
+    {n:"Brioche au bœuf grillé", n_en:"Grilled Beef Buns", n_zh:"煎牛肉包", zh:"6 pcs", p:"8,80 €", d:"Faite maison", d_en:"Homemade", d_zh:"自家手工制作"},
+    {n:"Brioche au bœuf", n_en:"Beef Buns", n_zh:"牛肉包", zh:"4 pcs", p:"4,80 €", d:"Faite maison", d_en:"Homemade", d_zh:"自家手工制作"},
+    {n:"Xiaolongbao faits maison", n_en:"Homemade Xiaolongbao", n_zh:"小笼包", zh:"小笼包 · 6 pcs", p:"7,80 €", d:"Raviolis vapeur à la soupe, notre signature.", d_en:"Steamed soup dumplings, our signature.", d_zh:"招牌灌汤蒸饺。"},
+    {n:"Tempura de crevettes frites", n_en:"Crispy Shrimp Tempura", n_zh:"炸虾天妇罗", zh:"4 pcs", p:"6,80 €"},
+    {n:"Bouchées aux crevettes", n_en:"Shrimp Bites", n_zh:"虾饺", p:"5,80 €"},
+    {n:"Nems", n_en:"Spring Rolls", n_zh:"春卷", p:"5,80 €"},
+    {n:"Samossas de bœuf au curry frits", n_en:"Fried Beef Curry Samosas", n_zh:"咖喱牛肉酥角", p:"5,80 €"},
+    {n:"Assortiment de dim sum frits", n_en:"Assorted Fried Dim Sum", n_zh:"炸点心拼盘", zh:"6 pcs", p:"8,80 €"}
   ]},
-  {t:"Entrées froides", items:[
-    {n:"Konjac minceur & lotus aux nouilles (duo)", zh:"魔芋凉皮+面藕", p:"9,90 €"},
-    {n:"Lotus aux nouilles façon Niujin", zh:"吸汁面藕", p:"9,90 €"},
-    {n:"Pattes de poulet désossées", zh:"无骨凤爪", p:"12,90 €"},
-    {n:"Œufs de cent ans au piment", zh:"雷椒皮蛋", p:"12,90 €", s:1},
-    {n:"Tofu aux œufs de cent ans", zh:"皮蛋豆腐", p:"10,90 €"},
-    {n:"Poulet « Koushui » sauce piquante", zh:"口水鸡", p:"9,90 €", s:1},
-    {n:"Salade de tofu séché", zh:"葱油豆腐丝", p:"9,90 €"},
-    {n:"Porc à l'ail (Suanni bairou)", zh:"蒜泥白肉", p:"11,90 €"},
-    {n:"Radis aigre mariné maison", zh:"自制酸萝卜", p:"6,90 €"},
-    {n:"Bœuf à la coriandre épicé", zh:"香菜拌牛肉", p:"12,90 €", s:1},
-    {n:"Tripes de bœuf à l'huile pimentée", zh:"红油牛百叶", p:"11,90 €", s:1},
-    {n:"Concombre croquant, vinaigrette à l'ail", zh:"拍黄瓜", p:"7,90 €"}
+  {t:"Entrées froides", t_en:"Cold Appetizers", t_zh:"凉菜", items:[
+    {n:"Konjac minceur & lotus aux nouilles (duo)", n_en:"Konjac & Noodle Lotus Root Duo", n_zh:"魔芋凉皮配面藕", zh:"魔芋凉皮+面藕", p:"9,90 €"},
+    {n:"Lotus aux nouilles façon Niujin", n_en:"Juicy Noodle Lotus Root", n_zh:"吸汁面藕", zh:"吸汁面藕", p:"9,90 €"},
+    {n:"Pattes de poulet désossées", n_en:"Boneless Chicken Feet", n_zh:"无骨凤爪", zh:"无骨凤爪", p:"12,90 €"},
+    {n:"Œufs de cent ans au piment", n_en:"Century Eggs with Chili", n_zh:"擂椒皮蛋", zh:"雷椒皮蛋", p:"12,90 €", s:1},
+    {n:"Tofu aux œufs de cent ans", n_en:"Tofu with Century Eggs", n_zh:"皮蛋豆腐", zh:"皮蛋豆腐", p:"10,90 €"},
+    {n:"Poulet « Koushui » sauce piquante", n_en:"Mouthwatering Chicken in Chili Sauce", n_zh:"口水鸡", zh:"口水鸡", p:"9,90 €", s:1},
+    {n:"Salade de tofu séché", n_en:"Shredded Tofu Salad with Scallion Oil", n_zh:"葱油豆腐丝", zh:"葱油豆腐丝", p:"9,90 €"},
+    {n:"Porc à l'ail (Suanni bairou)", n_en:"Sliced Pork with Garlic Sauce", n_zh:"蒜泥白肉", zh:"蒜泥白肉", p:"11,90 €"},
+    {n:"Radis aigre mariné maison", n_en:"House Pickled Sour Radish", n_zh:"自制酸萝卜", zh:"自制酸萝卜", p:"6,90 €"},
+    {n:"Bœuf à la coriandre épicé", n_en:"Spicy Beef with Coriander", n_zh:"香菜拌牛肉", zh:"香菜拌牛肉", p:"12,90 €", s:1},
+    {n:"Tripes de bœuf à l'huile pimentée", n_en:"Beef Tripe in Chili Oil", n_zh:"红油牛百叶", zh:"红油牛百叶", p:"11,90 €", s:1},
+    {n:"Concombre croquant, vinaigrette à l'ail", n_en:"Smashed Cucumber with Garlic Dressing", n_zh:"拍黄瓜", zh:"拍黄瓜", p:"7,90 €"}
   ]},
-  {t:"Fondues & Hot Pot", intro:"À partager (2-3 personnes). Possibilité d'ajouter bouillon et accompagnements à faire cuire soi-même.", items:[
-    {n:"Poisson mijoté en marmite (doux), pain vapeur", zh:"铁锅炖鱼", p:"39,80 €"},
-    {n:"Marmite de poulet en bouillon", zh:"鸡汤锅", p:"25,80 €"},
-    {n:"Maoxuewang en marmite", zh:"盆盆毛血旺", p:"32,80 €", s:2},
-    {n:"Canard au radis aigre", zh:"酸萝卜老鸭汤", p:"26,80 €"},
-    {n:"Fondue poisson & intestins", zh:"肥肠鱼火锅", p:"40,80 €", s:1},
-    {n:"Poulet Liangshan", zh:"梁山鸡", p:"29,80 €", s:1},
-    {n:"Bœuf bouilli épicé en marmite", zh:"水煮牛锅", p:"29,80 €", s:1},
-    {sub:"À ajouter à la fondue"},
-    {n:"Lunch meat", zh:"午餐肉", p:"6,00 €"},
-    {n:"Intestins braisés", zh:"卤肥肠", p:"8,00 €"},
-    {n:"Émincé de bœuf gras", zh:"肥牛卷", p:"8,00 €"},
-    {n:"Boulettes de poisson", zh:"鱼丸", p:"4,00 €"},
-    {n:"Feuille de tofu", zh:"豆皮", p:"4,00 €"},
-    {n:"Vermicelles de patate douce", zh:"红薯粉", p:"4,00 €"},
-    {n:"Udon", zh:"乌冬面", p:"3,00 €"},
-    {n:"Vermicelles de riz", zh:"米线", p:"4,00 €"},
-    {n:"Nouilles instantanées", zh:"方便面", p:"2,00 €"},
-    {n:"Lamelles de pomme de terre", zh:"土豆片", p:"4,00 €"},
-    {n:"Salade verte", zh:"沙拉菜", p:"4,00 €"},
-    {n:"Chou shanghai", zh:"上海青", p:"4,00 €"},
-    {n:"Chou chinois", zh:"大白菜", p:"4,00 €"},
-    {n:"Coriandre", zh:"香菜", p:"4,00 €"},
-    {n:"Champignons enoki", zh:"金针菇", p:"4,00 €"},
-    {n:"Germes de soja", zh:"绿豆芽", p:"4,00 €"},
-    {n:"Champignons noirs", zh:"木耳", p:"4,00 €"},
-    {n:"Tofu", zh:"豆腐", p:"4,00 €"},
-    {n:"Nœuds d'algues", zh:"海带结", p:"4,00 €"},
-    {n:"Radis aigre maison", zh:"自制酸萝卜", p:"5,00 €"},
-    {n:"Sang de canard", zh:"鸭血", p:"5,00 €"},
-    {n:"Tripes de bœuf", zh:"牛百叶", p:"5,00 €"},
-    {n:"Taro", zh:"芋头", p:"5,00 €"},
-    {n:"Lotus", zh:"藕片", p:"4,00 €"}
+  {t:"Fondues & Hot Pot", t_en:"Hot Pot & Stews", t_zh:"火锅与炖锅", intro:"À partager (2-3 personnes). Possibilité d'ajouter bouillon et accompagnements à faire cuire soi-même.", intro_en:"To share (2-3 people). Extra broth and ingredients can be added to cook yourself.", intro_zh:"适合2-3人分享。可加汤底及配菜自行涮煮。", items:[
+    {n:"Poisson mijoté en marmite (doux), pain vapeur", n_en:"Iron-Pot Braised Fish (mild) with Steamed Buns", n_zh:"铁锅炖鱼", zh:"铁锅炖鱼", p:"39,80 €"},
+    {n:"Marmite de poulet en bouillon", n_en:"Chicken Soup Hot Pot", n_zh:"鸡汤锅", zh:"鸡汤锅", p:"25,80 €"},
+    {n:"Maoxuewang en marmite", n_en:"Maoxuewang Spicy Hot Pot", n_zh:"盆盆毛血旺", zh:"盆盆毛血旺", p:"32,80 €", s:2},
+    {n:"Canard au radis aigre", n_en:"Duck & Sour Radish Soup", n_zh:"酸萝卜老鸭汤", zh:"酸萝卜老鸭汤", p:"26,80 €"},
+    {n:"Fondue poisson & intestins", n_en:"Fish & Pork Intestine Hot Pot", n_zh:"肥肠鱼火锅", zh:"肥肠鱼火锅", p:"40,80 €", s:1},
+    {n:"Poulet Liangshan", n_en:"Liangshan Chicken Hot Pot", n_zh:"梁山鸡", zh:"梁山鸡", p:"29,80 €", s:1},
+    {n:"Bœuf bouilli épicé en marmite", n_en:"Spicy Boiled Beef Hot Pot", n_zh:"水煮牛锅", zh:"水煮牛锅", p:"29,80 €", s:1},
+    {sub:"À ajouter à la fondue", sub_en:"Hot Pot Add-ons", sub_zh:"火锅加料"},
+    {n:"Lunch meat", n_en:"Luncheon Meat", n_zh:"午餐肉", zh:"午餐肉", p:"6,00 €"},
+    {n:"Intestins braisés", n_en:"Braised Pork Intestines", n_zh:"卤肥肠", zh:"卤肥肠", p:"8,00 €"},
+    {n:"Émincé de bœuf gras", n_en:"Sliced Fatty Beef", n_zh:"肥牛卷", zh:"肥牛卷", p:"8,00 €"},
+    {n:"Boulettes de poisson", n_en:"Fish Balls", n_zh:"鱼丸", zh:"鱼丸", p:"4,00 €"},
+    {n:"Feuille de tofu", n_en:"Tofu Skin", n_zh:"豆皮", zh:"豆皮", p:"4,00 €"},
+    {n:"Vermicelles de patate douce", n_en:"Sweet Potato Vermicelli", n_zh:"红薯粉", zh:"红薯粉", p:"4,00 €"},
+    {n:"Udon", n_en:"Udon Noodles", n_zh:"乌冬面", zh:"乌冬面", p:"3,00 €"},
+    {n:"Vermicelles de riz", n_en:"Rice Vermicelli", n_zh:"米线", zh:"米线", p:"4,00 €"},
+    {n:"Nouilles instantanées", n_en:"Instant Noodles", n_zh:"方便面", zh:"方便面", p:"2,00 €"},
+    {n:"Lamelles de pomme de terre", n_en:"Sliced Potato", n_zh:"土豆片", zh:"土豆片", p:"4,00 €"},
+    {n:"Salade verte", n_en:"Lettuce", n_zh:"沙拉菜", zh:"沙拉菜", p:"4,00 €"},
+    {n:"Chou shanghai", n_en:"Shanghai Bok Choy", n_zh:"上海青", zh:"上海青", p:"4,00 €"},
+    {n:"Chou chinois", n_en:"Napa Cabbage", n_zh:"大白菜", zh:"大白菜", p:"4,00 €"},
+    {n:"Coriandre", n_en:"Coriander", n_zh:"香菜", zh:"香菜", p:"4,00 €"},
+    {n:"Champignons enoki", n_en:"Enoki Mushrooms", n_zh:"金针菇", zh:"金针菇", p:"4,00 €"},
+    {n:"Germes de soja", n_en:"Mung Bean Sprouts", n_zh:"绿豆芽", zh:"绿豆芽", p:"4,00 €"},
+    {n:"Champignons noirs", n_en:"Wood Ear Mushrooms", n_zh:"木耳", zh:"木耳", p:"4,00 €"},
+    {n:"Tofu", n_en:"Tofu", n_zh:"豆腐", zh:"豆腐", p:"4,00 €"},
+    {n:"Nœuds d'algues", n_en:"Kelp Knots", n_zh:"海带结", zh:"海带结", p:"4,00 €"},
+    {n:"Radis aigre maison", n_en:"House Pickled Sour Radish", n_zh:"自制酸萝卜", zh:"自制酸萝卜", p:"5,00 €"},
+    {n:"Sang de canard", n_en:"Duck Blood Curd", n_zh:"鸭血", zh:"鸭血", p:"5,00 €"},
+    {n:"Tripes de bœuf", n_en:"Beef Tripe", n_zh:"牛百叶", zh:"牛百叶", p:"5,00 €"},
+    {n:"Taro", n_en:"Taro", n_zh:"芋头", zh:"芋头", p:"5,00 €"},
+    {n:"Lotus", n_en:"Lotus Root", n_zh:"藕片", zh:"藕片", p:"4,00 €"}
   ]},
-  {t:"Soupes", items:[
-    {n:"Soupe poulet & champignons (bol)", zh:"菌菇鸡汤", p:"7,90 €"},
-    {n:"Potage Pékinois aigre & piquant", zh:"酸辣汤", p:"5,80 €", s:1},
-    {n:"Soupe de raviolis aux crevettes", zh:"虾云吞 · 4 pcs", p:"5,80 €"},
-    {n:"Soupe de raviolis épicées", zh:"红油抄手 · 8 pcs", p:"9,80 €", s:1},
-    {n:"Bouillon de pied de porc", zh:"老妈蹄花汤", p:"17,80 €"}
+  {t:"Soupes", t_en:"Soups", t_zh:"汤品", items:[
+    {n:"Soupe poulet & champignons (bol)", n_en:"Chicken & Mushroom Soup (bowl)", n_zh:"菌菇鸡汤", zh:"菌菇鸡汤", p:"7,90 €"},
+    {n:"Potage Pékinois aigre & piquant", n_en:"Hot & Sour Soup", n_zh:"酸辣汤", zh:"酸辣汤", p:"5,80 €", s:1},
+    {n:"Soupe de raviolis aux crevettes", n_en:"Shrimp Wonton Soup", n_zh:"虾云吞汤", zh:"虾云吞 · 4 pcs", p:"5,80 €"},
+    {n:"Soupe de raviolis épicées", n_en:"Spicy Wontons in Chili Oil", n_zh:"红油抄手", zh:"红油抄手 · 8 pcs", p:"9,80 €", s:1},
+    {n:"Bouillon de pied de porc", n_en:"Pork Trotter Soup", n_zh:"老妈蹄花汤", zh:"老妈蹄花汤", p:"17,80 €"}
   ]},
-  {t:"Spécialités", items:[
-    {n:"Homard & poulet en cocotte", zh:"招牌龙虾鸡煲", p:"65,80 €", d:"Plat signature à partager."},
-    {n:"Poulet & crabe en cocotte", zh:"鸡煲蟹 · 2-3 pers.", p:"39,80 €"},
-    {n:"Abats de poulet du Qianjiang", zh:"招牌黔江鸡杂", p:"19,80 €", s:3, d:"L'incontournable, fortement épicé."},
-    {n:"Crabe au jaune d'œuf salé", zh:"咸蛋黄焗蟹", p:"26,80 €"},
-    {n:"Boulettes de crevettes au maïs doré", zh:"金沙玉米虾球", p:"22,80 €"},
-    {n:"Poulet sauté au radis aigre", zh:"酸萝卜小炒鸡", p:"19,80 €", s:1},
-    {n:"Bœuf au piment mariné, poivron & coriandre", zh:"野山椒牛肉", p:"16,80 €", s:1},
-    {n:"Bœuf & champignons d'or, soupe acidulée", zh:"酸汤金针肥牛", p:"19,80 €", s:1},
-    {n:"Bœuf au fromage de soja", zh:"豆花牛肉", p:"18,80 €", s:1},
-    {n:"Porc sauté aux piments verts", zh:"辣椒炒肉", p:"14,80 €", s:1},
-    {n:"Poulet ou bœuf au chou acidulé", zh:"金汤酸菜鸡/牛", p:"19,80 €", s:1},
-    {n:"Plat campagnard « Yi Wan Xiang »", zh:"农家一碗香", p:"15,80 €", s:1},
-    {n:"Crevettes vapeur, ail & vermicelles", zh:"蒜茸粉丝蒸虾", p:"16,80 €"}
+  {t:"Spécialités", t_en:"House Specialties", t_zh:"招牌特色", items:[
+    {n:"Homard & poulet en cocotte", n_en:"Lobster & Chicken Claypot", n_zh:"招牌龙虾鸡煲", zh:"招牌龙虾鸡煲", p:"65,80 €", d:"Plat signature à partager.", d_en:"Signature dish to share.", d_zh:"招牌分享菜。"},
+    {n:"Poulet & crabe en cocotte", n_en:"Chicken & Crab Claypot", n_zh:"鸡煲蟹", zh:"鸡煲蟹 · 2-3 pers.", p:"39,80 €"},
+    {n:"Abats de poulet du Qianjiang", n_en:"Qianjiang-Style Chicken Giblets", n_zh:"招牌黔江鸡杂", zh:"招牌黔江鸡杂", p:"19,80 €", s:3, d:"L'incontournable, fortement épicé.", d_en:"A must-try, very spicy.", d_zh:"必点招牌，重辣。"},
+    {n:"Crabe au jaune d'œuf salé", n_en:"Crab with Salted Egg Yolk", n_zh:"咸蛋黄焗蟹", zh:"咸蛋黄焗蟹", p:"26,80 €"},
+    {n:"Boulettes de crevettes au maïs doré", n_en:"Golden Corn Shrimp Balls", n_zh:"金沙玉米虾球", zh:"金沙玉米虾球", p:"22,80 €"},
+    {n:"Poulet sauté au radis aigre", n_en:"Stir-Fried Chicken with Sour Radish", n_zh:"酸萝卜小炒鸡", zh:"酸萝卜小炒鸡", p:"19,80 €", s:1},
+    {n:"Bœuf au piment mariné, poivron & coriandre", n_en:"Beef with Pickled Chili, Pepper & Coriander", n_zh:"野山椒牛肉", zh:"野山椒牛肉", p:"16,80 €", s:1},
+    {n:"Bœuf & champignons d'or, soupe acidulée", n_en:"Beef & Enoki in Sour Soup", n_zh:"酸汤金针肥牛", zh:"酸汤金针肥牛", p:"19,80 €", s:1},
+    {n:"Bœuf au fromage de soja", n_en:"Beef with Tofu Pudding", n_zh:"豆花牛肉", zh:"豆花牛肉", p:"18,80 €", s:1},
+    {n:"Porc sauté aux piments verts", n_en:"Stir-Fried Pork with Green Chili", n_zh:"辣椒炒肉", zh:"辣椒炒肉", p:"14,80 €", s:1},
+    {n:"Poulet ou bœuf au chou acidulé", n_en:"Chicken or Beef with Pickled Cabbage in Golden Soup", n_zh:"金汤酸菜鸡/牛", zh:"金汤酸菜鸡/牛", p:"19,80 €", s:1},
+    {n:"Plat campagnard « Yi Wan Xiang »", n_en:"Farmhouse \"Yi Wan Xiang\" Medley", n_zh:"农家一碗香", zh:"农家一碗香", p:"15,80 €", s:1},
+    {n:"Crevettes vapeur, ail & vermicelles", n_en:"Steamed Shrimp with Garlic & Vermicelli", n_zh:"蒜茸粉丝蒸虾", zh:"蒜茸粉丝蒸虾", p:"16,80 €"}
   ]},
-  {t:"Poissons grillés", items:[
-    {n:"Bar en tranches, soupe dorée aigre-épicée", zh:"招牌片片鱼", p:"29,80 €", s:1, d:"Poisson signature."},
-    {n:"Poisson grillé épicé signature", zh:"特色烤鱼", p:"32,80 €", s:1},
-    {n:"Bar vapeur", zh:"清蒸海鲈鱼", p:"26,80 €"}
+  {t:"Poissons grillés", t_en:"Grilled Fish", t_zh:"烤鱼", items:[
+    {n:"Bar en tranches, soupe dorée aigre-épicée", n_en:"Sliced Sea Bass in Golden Hot & Sour Soup", n_zh:"招牌片片鱼", zh:"招牌片片鱼", p:"29,80 €", s:1, d:"Poisson signature.", d_en:"Signature fish dish.", d_zh:"招牌鱼。"},
+    {n:"Poisson grillé épicé signature", n_en:"Signature Spicy Grilled Fish", n_zh:"特色烤鱼", zh:"特色烤鱼", p:"32,80 €", s:1},
+    {n:"Bar vapeur", n_en:"Steamed Sea Bass", n_zh:"清蒸海鲈鱼", zh:"清蒸海鲈鱼", p:"26,80 €"}
   ]},
-  {t:"Wok Mala Xiang Guo", intro:"Grand wok généreux : viandes, fruits de mer, légumes, tofu et nouilles sautés dans notre sauce exclusive. Saveur « Mala » épicée au poivre du Sichuan, ou version douce — avec ou sans piment.", items:[
-    {n:"Wok tout légumes", zh:"全素香锅", p:"15,80 €"},
-    {n:"Wok Mala pour deux (nouilles + 2 viandes)", zh:"双人麻辣香锅", p:"29,80 €", s:2},
-    {n:"Wok de crevettes épicées", zh:"干锅虾", p:"18,80 €", s:1},
-    {n:"Wok de crabe épicé", zh:"干锅香辣蟹", p:"22,80 €", s:1},
-    {n:"Wok de poulet désossé", zh:"无骨干锅鸡", p:"16,80 €"},
-    {n:"Wok de travers de porc", zh:"干锅排骨", p:"16,80 €"},
-    {n:"Wok d'ailes de poulet", zh:"干锅鸡翅", p:"16,80 €"},
-    {n:"Wok de pied de cochon", zh:"干锅猪蹄", p:"16,80 €"},
-    {n:"Wok de poitrine de porc", zh:"干锅五花肉", p:"16,80 €"}
+  {t:"Wok Mala Xiang Guo", t_en:"Mala Xiang Guo Wok", t_zh:"麻辣香锅", intro:"Grand wok généreux : viandes, fruits de mer, légumes, tofu et nouilles sautés dans notre sauce exclusive. Saveur « Mala » épicée au poivre du Sichuan, ou version douce — avec ou sans piment.", intro_en:"A generous wok: meats, seafood, vegetables, tofu and noodles stir-fried in our exclusive sauce. Spicy \"Mala\" Sichuan-pepper flavor, or mild version — with or without chili.", intro_zh:"丰盛大锅：肉类、海鲜、蔬菜、豆腐和面条以独家酱料翻炒。可选麻辣花椒味或清淡口味，辣度自选。", items:[
+    {n:"Wok tout légumes", n_en:"All-Vegetable Wok", n_zh:"全素香锅", zh:"全素香锅", p:"15,80 €"},
+    {n:"Wok Mala pour deux (nouilles + 2 viandes)", n_en:"Mala Wok for Two (noodles + 2 meats)", n_zh:"双人麻辣香锅", zh:"双人麻辣香锅", p:"29,80 €", s:2},
+    {n:"Wok de crevettes épicées", n_en:"Spicy Shrimp Wok", n_zh:"干锅虾", zh:"干锅虾", p:"18,80 €", s:1},
+    {n:"Wok de crabe épicé", n_en:"Spicy Crab Wok", n_zh:"干锅香辣蟹", zh:"干锅香辣蟹", p:"22,80 €", s:1},
+    {n:"Wok de poulet désossé", n_en:"Boneless Chicken Wok", n_zh:"无骨干锅鸡", zh:"无骨干锅鸡", p:"16,80 €"},
+    {n:"Wok de travers de porc", n_en:"Pork Spare Ribs Wok", n_zh:"干锅排骨", zh:"干锅排骨", p:"16,80 €"},
+    {n:"Wok d'ailes de poulet", n_en:"Chicken Wings Wok", n_zh:"干锅鸡翅", zh:"干锅鸡翅", p:"16,80 €"},
+    {n:"Wok de pied de cochon", n_en:"Pork Trotter Wok", n_zh:"干锅猪蹄", zh:"干锅猪蹄", p:"16,80 €"},
+    {n:"Wok de poitrine de porc", n_en:"Pork Belly Wok", n_zh:"干锅五花肉", zh:"干锅五花肉", p:"16,80 €"}
   ]},
-  {t:"Plats sautés", items:[
-    {n:"Poulet sauté", zh:"小煎鸡", p:"14,80 €"},
-    {n:"Bœuf aux pommes de terre", zh:"土豆牛腩", p:"15,80 €"},
-    {n:"Canard croustillant", zh:"香酥鸭", p:"12,90 €"},
-    {n:"Crevettes, ail & vermicelles", zh:"蒜茸粉丝虾", p:"16,80 €"},
-    {n:"Intestins de porc au piment vert", zh:"尖椒肥肠", p:"14,80 €", s:1},
-    {n:"Bœuf bouilli épicé", zh:"水煮牛", p:"16,80 €", s:1},
-    {n:"Canard Mao épicé", zh:"冒烤鸭", p:"16,80 €", s:1},
-    {n:"Poulet croustillant au piment sec", zh:"无骨辣子鸡", p:"16,80 €", s:1},
-    {n:"Poitrine de porc braisée (Hongshaorou)", zh:"红烧肉", p:"15,80 €"},
-    {n:"Crevettes impériales", zh:"宫爆虾球", p:"16,80 €"},
-    {n:"Crevettes au sel & poivre", zh:"椒盐虾", p:"16,80 €"},
-    {n:"Boulettes de crevettes au brocoli", zh:"西兰花虾球", p:"16,80 €"},
-    {n:"Haricots verts marinés maison & porc haché", zh:"酸豆角炒肉泥", p:"13,80 €"},
-    {n:"Bœuf aux oignons", zh:"洋葱炒牛肉", p:"13,80 €"},
-    {n:"Brocoli au bœuf", zh:"西兰花牛肉", p:"13,80 €"},
-    {n:"Poulet sauté à l'ananas", zh:"菠萝咕唠鸡", p:"13,80 €"},
-    {n:"Poulet Kung Pao", zh:"宫保鸡丁", p:"13,80 €", s:1},
-    {n:"Poulet à la sauce Yuxiang", zh:"鱼香鸡丝", p:"13,80 €"},
-    {n:"Poulet aux champignons noirs", zh:"木耳鸡", p:"12,90 €"},
-    {n:"Porc cuit deux fois au wok", zh:"回锅肉", p:"13,80 €", s:1}
+  {t:"Plats sautés", t_en:"Stir-Fried Dishes", t_zh:"热炒", items:[
+    {n:"Poulet sauté", n_en:"Stir-Fried Chicken", n_zh:"小煎鸡", zh:"小煎鸡", p:"14,80 €"},
+    {n:"Bœuf aux pommes de terre", n_en:"Beef Brisket with Potatoes", n_zh:"土豆牛腩", zh:"土豆牛腩", p:"15,80 €"},
+    {n:"Canard croustillant", n_en:"Crispy Duck", n_zh:"香酥鸭", zh:"香酥鸭", p:"12,90 €"},
+    {n:"Crevettes, ail & vermicelles", n_en:"Shrimp with Garlic & Vermicelli", n_zh:"蒜茸粉丝虾", zh:"蒜茸粉丝虾", p:"16,80 €"},
+    {n:"Intestins de porc au piment vert", n_en:"Pork Intestines with Green Chili", n_zh:"尖椒肥肠", zh:"尖椒肥肠", p:"14,80 €", s:1},
+    {n:"Bœuf bouilli épicé", n_en:"Spicy Boiled Beef", n_zh:"水煮牛", zh:"水煮牛", p:"16,80 €", s:1},
+    {n:"Canard Mao épicé", n_en:"Spicy Roast Duck (Mao-Style)", n_zh:"冒烤鸭", zh:"冒烤鸭", p:"16,80 €", s:1},
+    {n:"Poulet croustillant au piment sec", n_en:"Crispy Chicken with Dried Chili", n_zh:"无骨辣子鸡", zh:"无骨辣子鸡", p:"16,80 €", s:1},
+    {n:"Poitrine de porc braisée (Hongshaorou)", n_en:"Red-Braised Pork Belly", n_zh:"红烧肉", zh:"红烧肉", p:"15,80 €"},
+    {n:"Crevettes impériales", n_en:"Kung Pao Shrimp Balls", n_zh:"宫爆虾球", zh:"宫爆虾球", p:"16,80 €"},
+    {n:"Crevettes au sel & poivre", n_en:"Salt & Pepper Shrimp", n_zh:"椒盐虾", zh:"椒盐虾", p:"16,80 €"},
+    {n:"Boulettes de crevettes au brocoli", n_en:"Shrimp Balls with Broccoli", n_zh:"西兰花虾球", zh:"西兰花虾球", p:"16,80 €"},
+    {n:"Haricots verts marinés maison & porc haché", n_en:"Pickled Green Beans with Minced Pork", n_zh:"酸豆角炒肉泥", zh:"酸豆角炒肉泥", p:"13,80 €"},
+    {n:"Bœuf aux oignons", n_en:"Beef with Onions", n_zh:"洋葱炒牛肉", zh:"洋葱炒牛肉", p:"13,80 €"},
+    {n:"Brocoli au bœuf", n_en:"Beef with Broccoli", n_zh:"西兰花牛肉", zh:"西兰花牛肉", p:"13,80 €"},
+    {n:"Poulet sauté à l'ananas", n_en:"Sweet & Sour Chicken with Pineapple", n_zh:"菠萝咕咾鸡", zh:"菠萝咕唠鸡", p:"13,80 €"},
+    {n:"Poulet Kung Pao", n_en:"Kung Pao Chicken", n_zh:"宫保鸡丁", zh:"宫保鸡丁", p:"13,80 €", s:1},
+    {n:"Poulet à la sauce Yuxiang", n_en:"Yuxiang Shredded Chicken", n_zh:"鱼香鸡丝", zh:"鱼香鸡丝", p:"13,80 €"},
+    {n:"Poulet aux champignons noirs", n_en:"Chicken with Wood Ear Mushrooms", n_zh:"木耳鸡", zh:"木耳鸡", p:"12,90 €"},
+    {n:"Porc cuit deux fois au wok", n_en:"Twice-Cooked Pork", n_zh:"回锅肉", zh:"回锅肉", p:"13,80 €", s:1}
   ]},
-  {t:"Légumes & Tofu", items:[
-    {n:"Pommes de terre & piments verts (poitrine de porc)", zh:"尖椒土豆片", p:"11,80 €"},
-    {n:"Tofu au jaune de crabe (jambon)", zh:"蟹黄豆腐", p:"13,80 €"},
-    {n:"Aubergines sauce Yuxiang", zh:"鱼香茄子", p:"11,80 €"},
-    {n:"Maïs doré croustillant", zh:"金沙玉米", p:"14,80 €"},
-    {n:"Vermicelles à la viande", zh:"烂肉粉条", p:"11,80 €"},
-    {n:"Liseron d'eau à l'ail", zh:"蒜蓉空心菜", p:"12,90 €"},
-    {n:"Vermicelles au chou épicés", zh:"辣炒粉丝莲白", p:"11,80 €", s:1},
-    {n:"Œufs brouillés à la tomate", zh:"西红柿炒鸡蛋", p:"10,90 €"},
-    {n:"Haricots verts sautés (porc haché)", zh:"干煸豆角", p:"12,80 €"},
-    {n:"Chou shanghai sauté à l'ail", zh:"蒜蓉上海青", p:"9,90 €"},
-    {n:"Chou sauté au wok épicé & poitrine de porc", zh:"干锅手撕包菜", p:"11,80 €", s:1},
-    {n:"Chou chinois en vinaigrette épicée", zh:"辣炒醋溜白菜", p:"9,90 €", s:1},
-    {n:"Œufs brouillés au piment vert", zh:"擂辣椒炒蛋", p:"12,80 €", s:1},
-    {n:"Brocoli à l'ail", zh:"蒜蓉西兰花", p:"10,90 €"},
-    {n:"Tofu séché au porc & piment vert", zh:"尖椒炒豆皮", p:"12,80 €", s:1},
-    {n:"Tofu séché aux légumes chop suey", zh:"素什锦炒豆皮", p:"10,90 €"},
-    {n:"Mapo tofu au porc haché épicé", zh:"麻婆豆腐", p:"11,80 €", s:1}
+  {t:"Légumes & Tofu", t_en:"Vegetables & Tofu", t_zh:"蔬菜与豆腐", items:[
+    {n:"Pommes de terre & piments verts (poitrine de porc)", n_en:"Potato & Green Chili with Pork Belly", n_zh:"尖椒土豆片", zh:"尖椒土豆片", p:"11,80 €"},
+    {n:"Tofu au jaune de crabe (jambon)", n_en:"Tofu with Crab Roe (ham)", n_zh:"蟹黄豆腐", zh:"蟹黄豆腐", p:"13,80 €"},
+    {n:"Aubergines sauce Yuxiang", n_en:"Yuxiang Eggplant", n_zh:"鱼香茄子", zh:"鱼香茄子", p:"11,80 €"},
+    {n:"Maïs doré croustillant", n_en:"Crispy Golden Corn", n_zh:"金沙玉米", zh:"金沙玉米", p:"14,80 €"},
+    {n:"Vermicelles à la viande", n_en:"Glass Noodles with Minced Pork", n_zh:"烂肉粉条", zh:"烂肉粉条", p:"11,80 €"},
+    {n:"Liseron d'eau à l'ail", n_en:"Water Spinach with Garlic", n_zh:"蒜蓉空心菜", zh:"蒜蓉空心菜", p:"12,90 €"},
+    {n:"Vermicelles au chou épicés", n_en:"Spicy Glass Noodles with Cabbage", n_zh:"辣炒粉丝莲白", zh:"辣炒粉丝莲白", p:"11,80 €", s:1},
+    {n:"Œufs brouillés à la tomate", n_en:"Scrambled Eggs with Tomato", n_zh:"西红柿炒鸡蛋", zh:"西红柿炒鸡蛋", p:"10,90 €"},
+    {n:"Haricots verts sautés (porc haché)", n_en:"Dry-Fried Green Beans with Minced Pork", n_zh:"干煸豆角", zh:"干煸豆角", p:"12,80 €"},
+    {n:"Chou shanghai sauté à l'ail", n_en:"Shanghai Bok Choy with Garlic", n_zh:"蒜蓉上海青", zh:"蒜蓉上海青", p:"9,90 €"},
+    {n:"Chou sauté au wok épicé & poitrine de porc", n_en:"Spicy Hand-Torn Cabbage with Pork Belly", n_zh:"干锅手撕包菜", zh:"干锅手撕包菜", p:"11,80 €", s:1},
+    {n:"Chou chinois en vinaigrette épicée", n_en:"Spicy Vinegar-Glazed Napa Cabbage", n_zh:"辣炒醋溜白菜", zh:"辣炒醋溜白菜", p:"9,90 €", s:1},
+    {n:"Œufs brouillés au piment vert", n_en:"Scrambled Eggs with Green Chili", n_zh:"擂辣椒炒蛋", zh:"擂辣椒炒蛋", p:"12,80 €", s:1},
+    {n:"Brocoli à l'ail", n_en:"Broccoli with Garlic", n_zh:"蒜蓉西兰花", zh:"蒜蓉西兰花", p:"10,90 €"},
+    {n:"Tofu séché au porc & piment vert", n_en:"Dried Tofu with Pork & Green Chili", n_zh:"尖椒炒豆皮", zh:"尖椒炒豆皮", p:"12,80 €", s:1},
+    {n:"Tofu séché aux légumes chop suey", n_en:"Dried Tofu with Mixed Vegetables", n_zh:"素什锦炒豆皮", zh:"素什锦炒豆皮", p:"10,90 €"},
+    {n:"Mapo tofu au porc haché épicé", n_en:"Mapo Tofu with Minced Pork", n_zh:"麻婆豆腐", zh:"麻婆豆腐", p:"11,80 €", s:1}
   ]},
-  {t:"Riz & Nouilles", items:[
-    {n:"Nouilles sautées maison (nouilles fraîches)", zh:"特色炒面", p:"11,90 €"},
-    {n:"Riz sauté radis aigre & intestins", zh:"酸豆角肥肠炒饭", p:"12,90 €"},
-    {n:"Riz cantonais radis aigre (Yangzhou)", zh:"酸萝卜扬州炒饭", p:"11,90 €"},
-    {n:"Riz sauté œuf & sauce soja", zh:"酱油鸡蛋炒饭", p:"9,90 €"},
-    {n:"Riz nature", zh:"米饭", p:"2,00 €"},
-    {n:"Riz cantonais au porc", zh:"广东炒饭", p:"9,90 €"},
-    {n:"Riz aux légumes", zh:"蔬菜炒饭", p:"9,90 €"},
-    {n:"Riz au poulet", zh:"鸡肉炒饭", p:"9,90 €"},
-    {n:"Riz crevettes & ananas frais, façon thaï", zh:"泰式菠萝虾炒饭", p:"12,90 €"},
-    {n:"Nouilles de blé sautées au bœuf", zh:"牛肉炒面", p:"9,90 €"},
-    {n:"Nouilles de blé sautées aux légumes", zh:"蔬菜炒面", p:"9,90 €"},
-    {n:"Nouilles de blé sautées au poulet", zh:"鸡炒面", p:"9,90 €"},
-    {n:"Pâtes de riz fraîches sautées au bœuf", zh:"干炒牛河", p:"10,90 €"},
-    {n:"Nouilles de blé sautées aux crevettes", zh:"虾炒面", p:"11,90 €"},
-    {n:"Pâtes de riz fraîches sautées au poulet", zh:"鸡肉炒河粉", p:"10,90 €"}
+  {t:"Riz & Nouilles", t_en:"Rice & Noodles", t_zh:"米饭与面条", items:[
+    {n:"Nouilles sautées maison (nouilles fraîches)", n_en:"House Stir-Fried Fresh Noodles", n_zh:"特色炒面", zh:"特色炒面", p:"11,90 €"},
+    {n:"Riz sauté radis aigre & intestins", n_en:"Fried Rice with Sour Beans & Pork Intestines", n_zh:"酸豆角肥肠炒饭", zh:"酸豆角肥肠炒饭", p:"12,90 €"},
+    {n:"Riz cantonais radis aigre (Yangzhou)", n_en:"Yangzhou Fried Rice with Sour Radish", n_zh:"酸萝卜扬州炒饭", zh:"酸萝卜扬州炒饭", p:"11,90 €"},
+    {n:"Riz sauté œuf & sauce soja", n_en:"Egg Fried Rice with Soy Sauce", n_zh:"酱油鸡蛋炒饭", zh:"酱油鸡蛋炒饭", p:"9,90 €"},
+    {n:"Riz nature", n_en:"Steamed Rice", n_zh:"米饭", zh:"米饭", p:"2,00 €"},
+    {n:"Riz cantonais au porc", n_en:"Cantonese Pork Fried Rice", n_zh:"广东炒饭", zh:"广东炒饭", p:"9,90 €"},
+    {n:"Riz aux légumes", n_en:"Vegetable Fried Rice", n_zh:"蔬菜炒饭", zh:"蔬菜炒饭", p:"9,90 €"},
+    {n:"Riz au poulet", n_en:"Chicken Fried Rice", n_zh:"鸡肉炒饭", zh:"鸡肉炒饭", p:"9,90 €"},
+    {n:"Riz crevettes & ananas frais, façon thaï", n_en:"Thai-Style Shrimp & Pineapple Fried Rice", n_zh:"泰式菠萝虾炒饭", zh:"泰式菠萝虾炒饭", p:"12,90 €"},
+    {n:"Nouilles de blé sautées au bœuf", n_en:"Stir-Fried Wheat Noodles with Beef", n_zh:"牛肉炒面", zh:"牛肉炒面", p:"9,90 €"},
+    {n:"Nouilles de blé sautées aux légumes", n_en:"Stir-Fried Wheat Noodles with Vegetables", n_zh:"蔬菜炒面", zh:"蔬菜炒面", p:"9,90 €"},
+    {n:"Nouilles de blé sautées au poulet", n_en:"Stir-Fried Wheat Noodles with Chicken", n_zh:"鸡肉炒面", zh:"鸡炒面", p:"9,90 €"},
+    {n:"Pâtes de riz fraîches sautées au bœuf", n_en:"Beef Chow Fun", n_zh:"干炒牛河", zh:"干炒牛河", p:"10,90 €"},
+    {n:"Nouilles de blé sautées aux crevettes", n_en:"Stir-Fried Wheat Noodles with Shrimp", n_zh:"虾仁炒面", zh:"虾炒面", p:"11,90 €"},
+    {n:"Pâtes de riz fraîches sautées au poulet", n_en:"Chicken Chow Fun", n_zh:"鸡肉炒河粉", zh:"鸡肉炒河粉", p:"10,90 €"}
   ]},
-  {t:"Soupes de nouilles", items:[
-    {n:"Nouilles larges, radis aigre & porc haché", zh:"酸萝卜拌面", p:"12,90 €"},
-    {n:"Nouilles à l'huile, végétarien", zh:"素油泼面", p:"9,80 €"},
-    {n:"Vermicelles, bouillon de poulet", zh:"特色鸡汤米线", p:"12,80 €"},
-    {n:"Nouilles, bouillon de travers épicé", zh:"香辣排骨汤面", p:"11,90 €", s:1},
-    {n:"Vermicelles bœuf gras, soupe acidulée", zh:"金酸汤肥牛米线", p:"11,90 €"},
-    {n:"Bouillon de nouilles de riz, bœuf braisé", zh:"香辣牛肉汤面", p:"11,90 €", s:1},
-    {n:"Nouilles froides au poulet épicé", zh:"麻辣鸡丝凉面", p:"11,90 €", s:1},
-    {n:"Soupe froide coréenne Naengmyeon", zh:"朝鲜荞麦冷面", p:"12,90 €", d:"Sarrasin, bœuf, œuf & légumes marinés."},
-    {n:"Soupe de vermicelles de patate douce, aigre-épicée", zh:"酸辣粉", p:"9,80 €", s:1},
-    {n:"Nouilles Yibin « Ranmian », porc haché épicé", zh:"宜宾燃面", p:"11,90 €", s:1},
-    {n:"Nouilles DanDan au porc haché", zh:"担担汤面", p:"10,80 €"},
-    {n:"Soupe de raviolis aux crevettes (nouilles)", zh:"虾云吞汤面", p:"11,80 €"}
+  {t:"Soupes de nouilles", t_en:"Noodle Soups", t_zh:"汤面与米线", items:[
+    {n:"Nouilles larges, radis aigre & porc haché", n_en:"Wide Noodles with Sour Radish & Minced Pork", n_zh:"酸萝卜拌面", zh:"酸萝卜拌面", p:"12,90 €"},
+    {n:"Nouilles à l'huile, végétarien", n_en:"Vegetarian Oil-Splashed Noodles", n_zh:"素油泼面", zh:"素油泼面", p:"9,80 €"},
+    {n:"Vermicelles, bouillon de poulet", n_en:"Rice Vermicelli in Chicken Broth", n_zh:"特色鸡汤米线", zh:"特色鸡汤米线", p:"12,80 €"},
+    {n:"Nouilles, bouillon de travers épicé", n_en:"Noodles in Spicy Spare Rib Broth", n_zh:"香辣排骨汤面", zh:"香辣排骨汤面", p:"11,90 €", s:1},
+    {n:"Vermicelles bœuf gras, soupe acidulée", n_en:"Rice Vermicelli with Fatty Beef in Sour Soup", n_zh:"金酸汤肥牛米线", zh:"金酸汤肥牛米线", p:"11,90 €"},
+    {n:"Bouillon de nouilles de riz, bœuf braisé", n_en:"Braised Beef Noodle Soup", n_zh:"香辣牛肉汤面", zh:"香辣牛肉汤面", p:"11,90 €", s:1},
+    {n:"Nouilles froides au poulet épicé", n_en:"Cold Noodles with Spicy Shredded Chicken", n_zh:"麻辣鸡丝凉面", zh:"麻辣鸡丝凉面", p:"11,90 €", s:1},
+    {n:"Soupe froide coréenne Naengmyeon", n_en:"Korean Cold Naengmyeon", n_zh:"朝鲜荞麦冷面", zh:"朝鲜荞麦冷面", p:"12,90 €", d:"Sarrasin, bœuf, œuf & légumes marinés.", d_en:"Buckwheat, beef, egg & pickled vegetables.", d_zh:"荞麦面、牛肉、鸡蛋及腌菜。"},
+    {n:"Soupe de vermicelles de patate douce, aigre-épicée", n_en:"Hot & Sour Sweet Potato Noodles", n_zh:"酸辣粉", zh:"酸辣粉", p:"9,80 €", s:1},
+    {n:"Nouilles Yibin « Ranmian », porc haché épicé", n_en:"Yibin Ranmian with Spicy Minced Pork", n_zh:"宜宾燃面", zh:"宜宾燃面", p:"11,90 €", s:1},
+    {n:"Nouilles DanDan au porc haché", n_en:"Dan Dan Noodles with Minced Pork", n_zh:"担担汤面", zh:"担担汤面", p:"10,80 €"},
+    {n:"Soupe de raviolis aux crevettes (nouilles)", n_en:"Shrimp Wonton Noodle Soup", n_zh:"虾云吞汤面", zh:"虾云吞汤面", p:"11,80 €"}
   ]},
-  {t:"Menus déjeuner & BBQ", intro:"Bols de riz « gaifan » servis du lundi au vendredi (11h–15h), hors jours fériés.", items:[
-    {n:"Riz au porc haché & haricots verts aigres", zh:"肉沫酸豆角盖饭", p:"10,90 €"},
-    {n:"Soupe poulet champignons + riz", zh:"菌菇鸡汤+米饭", p:"9,90 €"},
-    {n:"Riz aux haricots verts sautés", zh:"干煸豆角盖饭", p:"10,90 €"},
-    {n:"Riz Mapo tofu", zh:"麻婆豆腐盖饭", p:"10,90 €", s:1},
-    {n:"Riz aubergines Yuxiang", zh:"鱼香茄子盖饭", p:"10,90 €"},
-    {n:"Riz œufs au piment", zh:"辣椒炒蛋盖饭", p:"10,90 €", s:1},
-    {n:"Riz poulet sauté", zh:"小煎鸡盖饭", p:"10,90 €"},
-    {n:"Riz bœuf sauté", zh:"小炒黄牛肉盖饭", p:"11,90 €"},
-    {n:"Riz campagnard", zh:"农家一碗乡香盖饭", p:"11,90 €"},
-    {n:"Riz porc deux fois cuit", zh:"回锅肉盖饭", p:"10,90 €", s:1},
-    {sub:"Menus grillés / BBQ"},
-    {n:"Menu grillé au bœuf", p:"17,80 €", d:"Salade, basse côte de bœuf, légumes & riz nature."},
-    {n:"Menu grillé au poulet", p:"17,80 €", d:"Salade, ailes frites, cuisse de poulet, légumes & riz."},
-    {n:"Menu grillé au porc", p:"17,80 €", d:"Salade, porc au chou mariné, légumes & riz nature."}
+  {t:"Menus déjeuner & BBQ", t_en:"Lunch Sets & BBQ", t_zh:"午市套餐与烧烤", intro:"Bols de riz « gaifan » servis du lundi au vendredi (11h–15h), hors jours fériés.", intro_en:"\"Gaifan\" rice bowls served Monday to Friday (11am–3pm), except public holidays.", intro_zh:"盖饭套餐，周一至周五（11:00–15:00）供应，节假日除外。", items:[
+    {n:"Riz au porc haché & haricots verts aigres", n_en:"Rice Bowl with Minced Pork & Sour Beans", n_zh:"肉沫酸豆角盖饭", zh:"肉沫酸豆角盖饭", p:"10,90 €"},
+    {n:"Soupe poulet champignons + riz", n_en:"Chicken & Mushroom Soup + Rice", n_zh:"菌菇鸡汤配米饭", zh:"菌菇鸡汤+米饭", p:"9,90 €"},
+    {n:"Riz aux haricots verts sautés", n_en:"Rice Bowl with Dry-Fried Green Beans", n_zh:"干煸豆角盖饭", zh:"干煸豆角盖饭", p:"10,90 €"},
+    {n:"Riz Mapo tofu", n_en:"Mapo Tofu Rice Bowl", n_zh:"麻婆豆腐盖饭", zh:"麻婆豆腐盖饭", p:"10,90 €", s:1},
+    {n:"Riz aubergines Yuxiang", n_en:"Yuxiang Eggplant Rice Bowl", n_zh:"鱼香茄子盖饭", zh:"鱼香茄子盖饭", p:"10,90 €"},
+    {n:"Riz œufs au piment", n_en:"Chili Scrambled Egg Rice Bowl", n_zh:"辣椒炒蛋盖饭", zh:"辣椒炒蛋盖饭", p:"10,90 €", s:1},
+    {n:"Riz poulet sauté", n_en:"Stir-Fried Chicken Rice Bowl", n_zh:"小煎鸡盖饭", zh:"小煎鸡盖饭", p:"10,90 €"},
+    {n:"Riz bœuf sauté", n_en:"Stir-Fried Beef Rice Bowl", n_zh:"小炒黄牛肉盖饭", zh:"小炒黄牛肉盖饭", p:"11,90 €"},
+    {n:"Riz campagnard", n_en:"Farmhouse Rice Bowl", n_zh:"农家一碗乡香盖饭", zh:"农家一碗乡香盖饭", p:"11,90 €"},
+    {n:"Riz porc deux fois cuit", n_en:"Twice-Cooked Pork Rice Bowl", n_zh:"回锅肉盖饭", zh:"回锅肉盖饭", p:"10,90 €", s:1},
+    {sub:"Menus grillés / BBQ", sub_en:"Grilled / BBQ Sets", sub_zh:"烧烤套餐"},
+    {n:"Menu grillé au bœuf", n_en:"Grilled Beef Set", n_zh:"烤牛肉套餐", p:"17,80 €", d:"Salade, basse côte de bœuf, légumes & riz nature.", d_en:"Salad, beef chuck, vegetables & steamed rice.", d_zh:"沙拉、牛肩肉、蔬菜及白米饭。"},
+    {n:"Menu grillé au poulet", n_en:"Grilled Chicken Set", n_zh:"烤鸡套餐", p:"17,80 €", d:"Salade, ailes frites, cuisse de poulet, légumes & riz.", d_en:"Salad, fried wings, chicken thigh, vegetables & rice.", d_zh:"沙拉、炸鸡翅、鸡腿、蔬菜及米饭。"},
+    {n:"Menu grillé au porc", n_en:"Grilled Pork Set", n_zh:"烤猪肉套餐", p:"17,80 €", d:"Salade, porc au chou mariné, légumes & riz nature.", d_en:"Salad, pork with pickled cabbage, vegetables & steamed rice.", d_zh:"沙拉、酸菜猪肉、蔬菜及白米饭。"}
   ]},
-  {t:"Desserts", items:[
-    {n:"Boules de riz fermenté", zh:"酒酿圆子", p:"6,80 €"},
-    {n:"Perle de coco maison", zh:"糯米糍 · 2 pcs", p:"4,80 €"},
-    {n:"Bao croustillant lave d'or", zh:"黑金流沙包 · 2 pcs", p:"4,80 €"},
-    {n:"Boules de riz gluant, sésame noir / cacahuète", zh:"煮大汤圆", p:"3,80 €"},
-    {n:"Boules de riz gluant frites", zh:"炸大汤圆", p:"4,80 €"},
-    {n:"Galette de citrouille frite", zh:"南瓜饼", p:"3,80 €"},
-    {n:"Glace mochi", zh:"麻薯冰淇淋", p:"3,80 €"},
-    {n:"Gingembre confit & nougat chinois", zh:"芝麻糖姜糖", p:"4,80 €"},
-    {n:"Ananas frais", zh:"鲜菠萝", p:"4,80 €"},
-    {n:"Litchis au sirop", p:"3,80 €"}
+  {t:"Desserts", t_en:"Desserts", t_zh:"甜点", items:[
+    {n:"Boules de riz fermenté", n_en:"Fermented Rice Balls", n_zh:"酒酿圆子", zh:"酒酿圆子", p:"6,80 €"},
+    {n:"Perle de coco maison", n_en:"Homemade Coconut Mochi", n_zh:"糯米糍", zh:"糯米糍 · 2 pcs", p:"4,80 €"},
+    {n:"Bao croustillant lave d'or", n_en:"Crispy Golden Lava Bun", n_zh:"黑金流沙包", zh:"黑金流沙包 · 2 pcs", p:"4,80 €"},
+    {n:"Boules de riz gluant, sésame noir / cacahuète", n_en:"Glutinous Rice Balls, Black Sesame / Peanut", n_zh:"煮大汤圆", zh:"煮大汤圆", p:"3,80 €"},
+    {n:"Boules de riz gluant frites", n_en:"Fried Glutinous Rice Balls", n_zh:"炸大汤圆", zh:"炸大汤圆", p:"4,80 €"},
+    {n:"Galette de citrouille frite", n_en:"Fried Pumpkin Cake", n_zh:"南瓜饼", zh:"南瓜饼", p:"3,80 €"},
+    {n:"Glace mochi", n_en:"Mochi Ice Cream", n_zh:"麻薯冰淇淋", zh:"麻薯冰淇淋", p:"3,80 €"},
+    {n:"Gingembre confit & nougat chinois", n_en:"Candied Ginger & Chinese Nougat", n_zh:"芝麻糖姜糖", zh:"芝麻糖姜糖", p:"4,80 €"},
+    {n:"Ananas frais", n_en:"Fresh Pineapple", n_zh:"鲜菠萝", zh:"鲜菠萝", p:"4,80 €"},
+    {n:"Litchis au sirop", n_en:"Lychees in Syrup", n_zh:"糖水荔枝", p:"3,80 €"}
   ]},
-  {t:"Boissons", items:[
-    {n:"Thé gingembre au miel", zh:"韩国姜茶", p:"4,50 €"},
-    {n:"Thé Yuzu au miel", zh:"蜂蜜柚子茶", p:"4,50 €"},
-    {n:"Thé Oolong / thé vert", zh:"乌龙/绿茶", p:"3,80 €"},
-    {n:"Pâte de sésame noir", zh:"黑芝麻糊", p:"2,00 €"},
-    {n:"Cocktail sans alcool", zh:"无酒精鸡尾酒", p:"4,00 €"},
-    {n:"Jus de prune glacé maison", zh:"酸梅汤 · 1 L", p:"7,00 €"},
-    {n:"Coca-Cola", zh:"1,25 L", p:"7,00 €"},
-    {n:"Coca-Cola", zh:"33 cl", p:"3,00 €"},
-    {n:"Fanta", zh:"芬达", p:"3,50 €"},
-    {n:"Orangina", zh:"33 cl", p:"3,50 €"},
-    {n:"Oasis", zh:"33 cl", p:"3,50 €"},
-    {n:"Thé glacé jasmin", zh:"康师傅冰红茶", p:"4,00 €"},
-    {n:"Thé glacé", zh:"加多宝 · 33 cl", p:"3,50 €"},
-    {n:"Ice tea pêche", p:"3,50 €"},
-    {n:"Lait de soja chinois", zh:"豆奶 · 33 cl", p:"3,50 €"},
-    {n:"Lait de coco chinois", zh:"椰树椰汁", p:"4,00 €"},
-    {n:"Jus d'aloe vera", zh:"芦荟汁", p:"3,80 €"},
-    {n:"Jus d'orange", p:"3,50 €"},
-    {n:"Jus de litchi", p:"3,50 €"},
-    {n:"Jus d'ananas", p:"3,50 €"},
-    {n:"Jus de pomme", p:"3,50 €"},
-    {n:"Evian", zh:"eau plate", p:"3,50 €"},
-    {n:"San Pellegrino", zh:"eau gazeuse", p:"3,50 €"},
-    {sub:"Café & thé"},
-    {n:"Café espresso / allongé / serré", p:"2,00 €"},
-    {n:"Café noisette", p:"2,50 €"},
-    {n:"Café au lait", p:"3,00 €"},
-    {n:"Thé au jasmin / thé vert", p:"4,00 €"},
-    {n:"Fleur de thé Chrysanthème des neiges", zh:"雪菊", p:"4,00 €"},
-    {sub:"Bières"},
-    {n:"Bière Tsingtao", zh:"青岛 · 33 cl", p:"4,00 €"},
-    {n:"Bière Tsingtao", zh:"青岛 · 64 cl", p:"7,00 €"}
+  {t:"Boissons", t_en:"Drinks", t_zh:"饮品", items:[
+    {n:"Thé gingembre au miel", n_en:"Honey Ginger Tea", n_zh:"韩国姜茶", zh:"韩国姜茶", p:"4,50 €"},
+    {n:"Thé Yuzu au miel", n_en:"Honey Yuzu Tea", n_zh:"蜂蜜柚子茶", zh:"蜂蜜柚子茶", p:"4,50 €"},
+    {n:"Thé Oolong / thé vert", n_en:"Oolong / Green Tea", n_zh:"乌龙/绿茶", zh:"乌龙/绿茶", p:"3,80 €"},
+    {n:"Pâte de sésame noir", n_en:"Black Sesame Paste", n_zh:"黑芝麻糊", zh:"黑芝麻糊", p:"2,00 €"},
+    {n:"Cocktail sans alcool", n_en:"Mocktail", n_zh:"无酒精鸡尾酒", zh:"无酒精鸡尾酒", p:"4,00 €"},
+    {n:"Jus de prune glacé maison", n_en:"House Iced Sour Plum Juice", n_zh:"酸梅汤", zh:"酸梅汤 · 1 L", p:"7,00 €"},
+    {n:"Coca-Cola", n_en:"Coca-Cola", n_zh:"可口可乐", zh:"1,25 L", p:"7,00 €"},
+    {n:"Coca-Cola", n_en:"Coca-Cola", n_zh:"可口可乐", zh:"33 cl", p:"3,00 €"},
+    {n:"Fanta", n_en:"Fanta", n_zh:"芬达", zh:"芬达", p:"3,50 €"},
+    {n:"Orangina", n_en:"Orangina", n_zh:"奥兰治娜", zh:"33 cl", p:"3,50 €"},
+    {n:"Oasis", n_en:"Oasis", n_zh:"绿洲果汁", zh:"33 cl", p:"3,50 €"},
+    {n:"Thé glacé jasmin", n_en:"Jasmine Iced Tea", n_zh:"康师傅冰红茶", zh:"康师傅冰红茶", p:"4,00 €"},
+    {n:"Thé glacé", n_en:"Iced Tea", n_zh:"加多宝", zh:"加多宝 · 33 cl", p:"3,50 €"},
+    {n:"Ice tea pêche", n_en:"Peach Iced Tea", n_zh:"水蜜桃冰茶", p:"3,50 €"},
+    {n:"Lait de soja chinois", n_en:"Chinese Soy Milk", n_zh:"豆奶", zh:"豆奶 · 33 cl", p:"3,50 €"},
+    {n:"Lait de coco chinois", n_en:"Chinese Coconut Milk", n_zh:"椰树椰汁", zh:"椰树椰汁", p:"4,00 €"},
+    {n:"Jus d'aloe vera", n_en:"Aloe Vera Juice", n_zh:"芦荟汁", zh:"芦荟汁", p:"3,80 €"},
+    {n:"Jus d'orange", n_en:"Orange Juice", n_zh:"橙汁", p:"3,50 €"},
+    {n:"Jus de litchi", n_en:"Lychee Juice", n_zh:"荔枝汁", p:"3,50 €"},
+    {n:"Jus d'ananas", n_en:"Pineapple Juice", n_zh:"菠萝汁", p:"3,50 €"},
+    {n:"Jus de pomme", n_en:"Apple Juice", n_zh:"苹果汁", p:"3,50 €"},
+    {n:"Evian", n_en:"Evian", n_zh:"依云矿泉水", zh:"eau plate", p:"3,50 €"},
+    {n:"San Pellegrino", n_en:"San Pellegrino", n_zh:"圣培露气泡水", zh:"eau gazeuse", p:"3,50 €"},
+    {sub:"Café & thé", sub_en:"Coffee & Tea", sub_zh:"咖啡与茶"},
+    {n:"Café espresso / allongé / serré", n_en:"Espresso / Lungo / Ristretto", n_zh:"意式浓缩/美式/特浓咖啡", p:"2,00 €"},
+    {n:"Café noisette", n_en:"Café Noisette", n_zh:"玛奇朵咖啡", p:"2,50 €"},
+    {n:"Café au lait", n_en:"Café au Lait", n_zh:"牛奶咖啡", p:"3,00 €"},
+    {n:"Thé au jasmin / thé vert", n_en:"Jasmine / Green Tea", n_zh:"茉莉花茶/绿茶", p:"4,00 €"},
+    {n:"Fleur de thé Chrysanthème des neiges", n_en:"Snow Chrysanthemum Flower Tea", n_zh:"雪菊花茶", zh:"雪菊", p:"4,00 €"},
+    {sub:"Bières", sub_en:"Beers", sub_zh:"啤酒"},
+    {n:"Bière Tsingtao", n_en:"Tsingtao Beer", n_zh:"青岛啤酒", zh:"青岛 · 33 cl", p:"4,00 €"},
+    {n:"Bière Tsingtao", n_en:"Tsingtao Beer", n_zh:"青岛啤酒", zh:"青岛 · 64 cl", p:"7,00 €"}
   ]},
-  {t:"Vins & Alcools", items:[
-    {sub:"Vins rouges"},
-    {n:"Côtes du Tarn IGP (verre/carafe)", p:"3,50 € / 14cl", d:"25cl 6,50 €"},
-    {n:"Vallée du Rhône AOP", p:"12,80 € / 37,5cl", d:"75cl 18,80 €"},
-    {n:"Bordeaux Puisseguin Sémillon BIO AOP", p:"18,80 € / 37,5cl", d:"75cl 28,80 €"},
-    {n:"Beaujolais Brouilly AOP, Louis Girard", zh:"75cl", p:"19,80 €"},
-    {n:"Bourgogne Pinot Noir, Jean Loron", p:"26,80 € / 37,5cl", d:"75cl 38,80 €"},
-    {n:"Bourgogne Domaine Deliance AOP", zh:"75cl", p:"75,80 €"},
-    {sub:"Vins rosés"},
-    {n:"IGP Méditerranée Merlot Rosé (verre/carafe)", p:"3,50 € / 14cl", d:"25cl 6,50 € · 50cl 9,50 €"},
-    {n:"Côtes de Provence AOP", p:"15,80 € / 37,5cl", d:"75cl 27,80 €"},
-    {sub:"Vins blancs"},
-    {n:"IGP Méditerranée Chardonnay (verre/carafe)", p:"3,50 € / 14cl", d:"25cl 7,00 € · 50cl 10,00 €"},
-    {n:"Alsace", zh:"37,5cl", p:"17,80 €"},
-    {n:"Alsace", zh:"75cl", p:"25,80 €"},
-    {n:"Bourgogne", zh:"37,5cl", p:"19,80 €"},
-    {n:"Bourgogne", zh:"75cl", p:"32,80 €"},
-    {sub:"Champagne & spiritueux"},
-    {n:"Champagne", p:"38,80 €"},
-    {n:"Alcool de riz Jiang Xiaobai", zh:"江小白", p:"6,90 €"},
-    {n:"Xiao Langjiu", zh:"小狼酒", p:"11,90 €"},
-    {n:"Luzhou Laojiao", zh:"泸州老窖", p:"14,90 €"},
-    {n:"Tuopai Liuliang", zh:"沱牌六粮", p:"39,80 €"},
-    {n:"Hongxing Erguotou", zh:"红星二锅头", p:"39,80 €"},
-    {n:"Wuliangchun", zh:"五粮醇", p:"59,80 €"},
-    {n:"Alcool de riz rosé Mei Kwei Lu", zh:"digestif"},
-    {sub:"Apéritifs"},
-    {n:"J&B", p:"5,80 €"},
-    {n:"Chivas", p:"7,80 €"},
-    {n:"Kir", p:"4,80 €"},
-    {n:"Ricard", p:"4,80 €"},
-    {n:"Martini Bianco", p:"4,80 €"},
-    {n:"Martini Rosso", p:"4,80 €"},
-    {n:"Cocktail maison", p:"4,80 €", d:"Mei Kwei Lu, jus de litchi, Martini Extra Dry."}
+  {t:"Vins & Alcools", t_en:"Wines & Spirits", t_zh:"葡萄酒与烈酒", items:[
+    {sub:"Vins rouges", sub_en:"Red Wines", sub_zh:"红葡萄酒"},
+    {n:"Côtes du Tarn IGP (verre/carafe)", n_en:"Côtes du Tarn IGP (glass/carafe)", n_zh:"塔恩河谷 IGP（杯/瓶）", p:"3,50 € / 14cl", d:"25cl 6,50 €", d_en:"25cl 6,50 €", d_zh:"25cl 6,50 €"},
+    {n:"Vallée du Rhône AOP", n_en:"Rhône Valley AOP", n_zh:"罗讷河谷 AOP", p:"12,80 € / 37,5cl", d:"75cl 18,80 €", d_en:"75cl 18,80 €", d_zh:"75cl 18,80 €"},
+    {n:"Bordeaux Puisseguin Sémillon BIO AOP", n_en:"Bordeaux Puisseguin Sémillon Organic AOP", n_zh:"波尔多 普瑟冈 赛美蓉 有机 AOP", p:"18,80 € / 37,5cl", d:"75cl 28,80 €", d_en:"75cl 28,80 €", d_zh:"75cl 28,80 €"},
+    {n:"Beaujolais Brouilly AOP, Louis Girard", n_en:"Beaujolais Brouilly AOP, Louis Girard", n_zh:"博若莱 布鲁伊 AOP，路易·吉拉", zh:"75cl", p:"19,80 €"},
+    {n:"Bourgogne Pinot Noir, Jean Loron", n_en:"Burgundy Pinot Noir, Jean Loron", n_zh:"勃艮第 黑皮诺，让·洛龙", p:"26,80 € / 37,5cl", d:"75cl 38,80 €", d_en:"75cl 38,80 €", d_zh:"75cl 38,80 €"},
+    {n:"Bourgogne Domaine Deliance AOP", n_en:"Burgundy Domaine Deliance AOP", n_zh:"勃艮第 德利安斯酒庄 AOP", zh:"75cl", p:"75,80 €"},
+    {sub:"Vins rosés", sub_en:"Rosé Wines", sub_zh:"桃红葡萄酒"},
+    {n:"IGP Méditerranée Merlot Rosé (verre/carafe)", n_en:"IGP Méditerranée Merlot Rosé (glass/carafe)", n_zh:"地中海 IGP 梅洛桃红（杯/瓶）", p:"3,50 € / 14cl", d:"25cl 6,50 € · 50cl 9,50 €", d_en:"25cl 6,50 € · 50cl 9,50 €", d_zh:"25cl 6,50 € · 50cl 9,50 €"},
+    {n:"Côtes de Provence AOP", n_en:"Côtes de Provence AOP", n_zh:"普罗旺斯丘 AOP", p:"15,80 € / 37,5cl", d:"75cl 27,80 €", d_en:"75cl 27,80 €", d_zh:"75cl 27,80 €"},
+    {sub:"Vins blancs", sub_en:"White Wines", sub_zh:"白葡萄酒"},
+    {n:"IGP Méditerranée Chardonnay (verre/carafe)", n_en:"IGP Méditerranée Chardonnay (glass/carafe)", n_zh:"地中海 IGP 霞多丽（杯/瓶）", p:"3,50 € / 14cl", d:"25cl 7,00 € · 50cl 10,00 €", d_en:"25cl 7,00 € · 50cl 10,00 €", d_zh:"25cl 7,00 € · 50cl 10,00 €"},
+    {n:"Alsace", n_en:"Alsace", n_zh:"阿尔萨斯", zh:"37,5cl", p:"17,80 €"},
+    {n:"Alsace", n_en:"Alsace", n_zh:"阿尔萨斯", zh:"75cl", p:"25,80 €"},
+    {n:"Bourgogne", n_en:"Burgundy", n_zh:"勃艮第", zh:"37,5cl", p:"19,80 €"},
+    {n:"Bourgogne", n_en:"Burgundy", n_zh:"勃艮第", zh:"75cl", p:"32,80 €"},
+    {sub:"Champagne & spiritueux", sub_en:"Champagne & Spirits", sub_zh:"香槟与烈酒"},
+    {n:"Champagne", n_en:"Champagne", n_zh:"香槟", p:"38,80 €"},
+    {n:"Alcool de riz Jiang Xiaobai", n_en:"Jiang Xiaobai Rice Liquor", n_zh:"江小白", zh:"江小白", p:"6,90 €"},
+    {n:"Xiao Langjiu", n_en:"Xiao Langjiu", n_zh:"小狼酒", zh:"小狼酒", p:"11,90 €"},
+    {n:"Luzhou Laojiao", n_en:"Luzhou Laojiao", n_zh:"泸州老窖", zh:"泸州老窖", p:"14,90 €"},
+    {n:"Tuopai Liuliang", n_en:"Tuopai Liuliang", n_zh:"沱牌六粮", zh:"沱牌六粮", p:"39,80 €"},
+    {n:"Hongxing Erguotou", n_en:"Hongxing Erguotou", n_zh:"红星二锅头", zh:"红星二锅头", p:"39,80 €"},
+    {n:"Wuliangchun", n_en:"Wuliangchun", n_zh:"五粮醇", zh:"五粮醇", p:"59,80 €"},
+    {n:"Alcool de riz rosé Mei Kwei Lu", n_en:"Mei Kwei Lu Rose Rice Liquor", n_zh:"玫瑰露酒", zh:"digestif"},
+    {sub:"Apéritifs", sub_en:"Aperitifs", sub_zh:"开胃酒"},
+    {n:"J&B", n_en:"J&B", n_zh:"珍宝威士忌", p:"5,80 €"},
+    {n:"Chivas", n_en:"Chivas", n_zh:"芝华士", p:"7,80 €"},
+    {n:"Kir", n_en:"Kir", n_zh:"基尔酒", p:"4,80 €"},
+    {n:"Ricard", n_en:"Ricard", n_zh:"里卡尔茴香酒", p:"4,80 €"},
+    {n:"Martini Bianco", n_en:"Martini Bianco", n_zh:"马天尼 白", p:"4,80 €"},
+    {n:"Martini Rosso", n_en:"Martini Rosso", n_zh:"马天尼 红", p:"4,80 €"},
+    {n:"Cocktail maison", n_en:"House Cocktail", n_zh:"招牌鸡尾酒", p:"4,80 €", d:"Mei Kwei Lu, jus de litchi, Martini Extra Dry.", d_en:"Mei Kwei Lu, lychee juice, Martini Extra Dry.", d_zh:"玫瑰露酒、荔枝汁、马天尼干味美思。"}
   ]}
 ];
 
+// ===== Langue (FR / EN / 中文) =====
+const SUPPORTED=['fr','en','zh'];
+let LANG=(function(){try{const s=localStorage.getItem('vr_lang');return SUPPORTED.includes(s)?s:'fr';}catch(e){return 'fr';}})();
+// renvoie la valeur traduite d'un champ (n, d, t, intro, sub) avec repli sur le français
+function pick(it,base){return (LANG!=='fr'&&it[base+'_'+LANG])?it[base+'_'+LANG]:it[base];}
+
 function dishHTML(it){
-  if(it.sub) return '<div class="menu-cat-title">'+it.sub+'</div>';
+  if(it.sub) return '<div class="menu-cat-title">'+pick(it,'sub')+'</div>';
   const spice=it.s?'<span class="spice">'+'🌶️'.repeat(it.s)+'</span>':'';
   const zh=it.zh?'<span class="zh">'+it.zh+'</span>':'';
   const meta=(zh||spice)?' <span class="dish-meta">'+zh+(zh&&spice?' ':'')+spice+'</span>':'';
   const price=it.p?'<span class="dots"></span><span class="dish-price">'+it.p+'</span>':'';
-  const desc=it.d?'<div class="dish-desc">'+it.d+'</div>':'';
-  return '<div class="dish"><div class="dish-top"><span class="dish-name">'+it.n+meta+'</span>'+price+'</div>'+desc+'</div>';
+  const dv=pick(it,'d');
+  const desc=dv?'<div class="dish-desc">'+dv+'</div>':'';
+  return '<div class="dish"><div class="dish-top"><span class="dish-name">'+pick(it,'n')+meta+'</span>'+price+'</div>'+desc+'</div>';
 }
-(function renderMenu(){
+let activeTab=0;
+function renderMenu(){
   const tabsEl=document.getElementById('menuTabs'),panelsEl=document.getElementById('menuPanels');
   if(!tabsEl||!panelsEl) return;
   let tabs='',panels='';
   MENU.forEach((cat,i)=>{
-    tabs+='<button class="menu-tab'+(i===0?' active':'')+'" data-tab="cat'+i+'">'+cat.t+'</button>';
-    let body=cat.intro?'<p class="menu-intro">'+cat.intro+'</p>':'';
+    tabs+='<button class="menu-tab'+(i===activeTab?' active':'')+'" data-tab="cat'+i+'">'+pick(cat,'t')+'</button>';
+    let body=cat.intro?'<p class="menu-intro">'+pick(cat,'intro')+'</p>':'';
     body+='<div class="menu-cols">'+cat.items.map(dishHTML).join('')+'</div>';
-    panels+='<div class="menu-panel'+(i===0?' active':'')+'" id="cat'+i+'">'+body+'</div>';
+    panels+='<div class="menu-panel'+(i===activeTab?' active':'')+'" id="cat'+i+'">'+body+'</div>';
   });
   tabsEl.innerHTML=tabs;panelsEl.innerHTML=panels;
-  tabsEl.querySelectorAll('.menu-tab').forEach(tab=>{
+  tabsEl.querySelectorAll('.menu-tab').forEach((tab,idx)=>{
     tab.addEventListener('click',()=>{
+      activeTab=idx;
       tabsEl.querySelectorAll('.menu-tab').forEach(t=>t.classList.remove('active'));
       panelsEl.querySelectorAll('.menu-panel').forEach(p=>p.classList.remove('active'));
       tab.classList.add('active');
@@ -786,7 +811,7 @@ function dishHTML(it){
       tabsEl.scrollTo({left:tab.offsetLeft-(tabsEl.clientWidth-tab.clientWidth)/2,behavior:'smooth'});
     });
   });
-})();
+}
 
 // Onglets de la carte : défilement au glisser-souris + molette horizontale
 (function dragScrollTabs(){
@@ -831,6 +856,70 @@ const io=new IntersectionObserver((entries)=>{
   entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
 },{threshold:.12});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+// ===== Dictionnaire de traduction de l'interface =====
+const I18N={
+  fr:{
+    'nav.gallery':`Galerie`,'nav.menu':`La carte`,'nav.about':`À propos`,'nav.infos':`Infos`,'nav.contact':`Contact`,'nav.book':`Réserver`,
+    'hero.eyebrow':`Restaurant Chinois · Paris 9ᵉ`,'hero.sub':`Raviolis maison, dim sum & spécialités du Sichuan, au cœur du Faubourg Montmartre`,'hero.cta1':`Découvrir la carte`,'hero.cta2':`Réserver une table`,'hero.scroll':`Défiler ↓`,
+    'strip.k1':`Note Google`,'strip.v1':`★ 4,7 / 5 · 336 avis`,'strip.k2':`Spécialité`,'strip.v2':`Raviolis & Sichuan`,'strip.k3':`Adresse`,'strip.k4':`Service`,'strip.v4':`Sur place · Emporter · Livraison`,
+    'gallery.eyebrow':`En images`,'gallery.title':`Nos plats`,'gallery.lead':`Découvrez nos plats signatures, où chaque assiette raconte une histoire de raviolis maison et de saveurs du Sichuan.`,
+    'menu.eyebrow':`Nos plats`,'menu.title':`La carte`,'menu.lead':`Une sélection de nos spécialités. <span class="spice">🌶️</span> indique les plats épicés. Carte complète disponible sur place et en ligne.`,'menu.note':`Carte non exhaustive · Prix nets en euros, taxes et service compris. Menus déjeuner servis du lundi au vendredi (11h–15h).`,
+    'about.eyebrow':`À propos de nous`,'about.title':`Bien plus que des raviolis`,'about.lead':`Si nos raviolis faits maison ont fait notre réputation, notre carte déploie tout le répertoire de la cuisine chinoise — une table généreuse à partager dans une salle chaleureuse.`,'about.h3':`Toute la richesse de la cuisine chinoise`,'about.p1':`Chez <strong>Viva Raviolis</strong>, nos raviolis et dim sum faits maison — porc et ciboulette, crevettes royales, gyoza, bao laqués — ne sont que le début. Notre carte déploie une cuisine chinoise complète et généreuse.`,'about.p2':`Woks <strong>Mala Xiang Guo</strong>, fondues et hot pots à partager, poissons grillés signature, plats sautés, spécialités épicées du <strong>Sichuan</strong>, soupes, nouilles et riz parfumés : une table conviviale où chacun trouve son bonheur, du plus doux au plus relevé.`,'about.sign':`« Une cuisine franche et généreuse, à partager autour de la table. »`,'about.feat1':`Plats à la carte`,'about.feat2':`336 avis`,'about.feat3':`Midi & soir`,'about.badge':`Faits maison`,
+    'salle.eyebrow':`Bienvenue chez nous`,'salle.title':`Notre salle`,'salle.lead':`Une atmosphère chaleureuse et conviviale, au cœur du Faubourg Montmartre — l'endroit idéal pour partager raviolis, woks et fondues, entre amis ou en famille.`,'salle.badge':`Notre salle`,
+    'infos.eyebrow':`Informations pratiques`,'infos.title':`Nous trouver & réserver`,'infos.lead':`Au cœur du 9ᵉ arrondissement, à deux pas des Grands Boulevards.`,'infos.hours':`Horaires`,'infos.monThu':`Lundi – Jeudi`,'infos.fri':`Vendredi`,'infos.sat':`Samedi`,'infos.sun':`Dimanche`,'infos.open7':`Ouvert 7j/7, midi et soir.`,'infos.address':`Adresse`,'infos.directions':`Itinéraire Google Maps →`,'infos.metro':`M° Grands Boulevards · Le Peletier`,'infos.reservations':`Réservations`,'infos.reservDesc':`Réservez votre table par téléphone :`,'infos.services':`Services`,'infos.tag1':`Sur place`,'infos.tag2':`À emporter`,'infos.tag3':`Livraison`,
+    'cta.title':`Réservez votre table`,'cta.sub':`Venez partager raviolis maison et spécialités du Sichuan dans une ambiance conviviale.`,'cta.book':`Réserver`,
+    'footer.desc':`Restaurant chinois · Raviolis maison, dim sum & cuisine du Sichuan, au cœur de Paris 9ᵉ. Une cuisine authentique, généreuse et conviviale.`,'footer.contact':`Coordonnées`,'footer.nav':`Navigation`,'footer.access':`Infos & accès`,'footer.rights':`© 2026 Viva Raviolis. Tous droits réservés.`,'footer.legal':`Mentions légales`,'footer.privacy':`Politique de confidentialité`,
+    '_title':`VIVA RAVIOLIS — Restaurant Chinois · Raviolis & Cuisine du Sichuan · Paris 9e`,'_desc':`VIVA RAVIOLIS, restaurant chinois au cœur de Paris 9e. Raviolis maison, dim sum, spécialités du Sichuan. Sur place, à emporter & livraison. 57 rue du Faubourg Montmartre.`
+  },
+  en:{
+    'nav.gallery':`Gallery`,'nav.menu':`Menu`,'nav.about':`About`,'nav.infos':`Info`,'nav.contact':`Contact`,'nav.book':`Book`,
+    'hero.eyebrow':`Chinese Restaurant · Paris 9th`,'hero.sub':`Homemade dumplings, dim sum & Sichuan specialties, in the heart of Faubourg Montmartre`,'hero.cta1':`Explore the menu`,'hero.cta2':`Book a table`,'hero.scroll':`Scroll ↓`,
+    'strip.k1':`Google rating`,'strip.v1':`★ 4.7 / 5 · 336 reviews`,'strip.k2':`Specialty`,'strip.v2':`Dumplings & Sichuan`,'strip.k3':`Address`,'strip.k4':`Service`,'strip.v4':`Dine-in · Takeaway · Delivery`,
+    'gallery.eyebrow':`In pictures`,'gallery.title':`Our dishes`,'gallery.lead':`Discover our signature dishes, where every plate tells a story of homemade dumplings and Sichuan flavors.`,
+    'menu.eyebrow':`Our dishes`,'menu.title':`The menu`,'menu.lead':`A selection of our specialties. <span class="spice">🌶️</span> marks spicy dishes. Full menu available in the restaurant and online.`,'menu.note':`Non-exhaustive menu · Net prices in euros, taxes and service included. Lunch sets served Monday to Friday (11am–3pm).`,
+    'about.eyebrow':`About us`,'about.title':`Much more than dumplings`,'about.lead':`While our homemade dumplings built our reputation, our menu unfolds the whole repertoire of Chinese cuisine — a generous table to share in a warm dining room.`,'about.h3':`All the richness of Chinese cuisine`,'about.p1':`At <strong>Viva Raviolis</strong>, our homemade dumplings and dim sum — pork & chives, king prawns, gyoza, glazed bao — are only the beginning. Our menu unfolds a complete and generous Chinese cuisine.`,'about.p2':`<strong>Mala Xiang Guo</strong> woks, hot pots to share, signature grilled fish, stir-fries, spicy <strong>Sichuan</strong> specialties, soups, noodles and fragrant rice: a convivial table where everyone finds their favorite, from the mildest to the boldest.`,'about.sign':`“Honest, generous cooking, to share around the table.”`,'about.feat1':`Dishes on the menu`,'about.feat2':`336 reviews`,'about.feat3':`Lunch & dinner`,'about.badge':`Homemade`,
+    'salle.eyebrow':`Welcome`,'salle.title':`Our dining room`,'salle.lead':`A warm and convivial atmosphere in the heart of Faubourg Montmartre — the perfect place to share dumplings, woks and hot pots, with friends or family.`,'salle.badge':`Our dining room`,
+    'infos.eyebrow':`Practical information`,'infos.title':`Find us & book`,'infos.lead':`In the heart of the 9th arrondissement, steps from the Grands Boulevards.`,'infos.hours':`Opening hours`,'infos.monThu':`Mon – Thu`,'infos.fri':`Friday`,'infos.sat':`Saturday`,'infos.sun':`Sunday`,'infos.open7':`Open 7 days a week, lunch and dinner.`,'infos.address':`Address`,'infos.directions':`Directions on Google Maps →`,'infos.metro':`Metro Grands Boulevards · Le Peletier`,'infos.reservations':`Reservations`,'infos.reservDesc':`Book your table by phone:`,'infos.services':`Services`,'infos.tag1':`Dine-in`,'infos.tag2':`Takeaway`,'infos.tag3':`Delivery`,
+    'cta.title':`Book your table`,'cta.sub':`Come share homemade dumplings and Sichuan specialties in a friendly atmosphere.`,'cta.book':`Book`,
+    'footer.desc':`Chinese restaurant · Homemade dumplings, dim sum & Sichuan cuisine, in the heart of Paris 9th. Authentic, generous and convivial cooking.`,'footer.contact':`Contact`,'footer.nav':`Navigation`,'footer.access':`Info & access`,'footer.rights':`© 2026 Viva Raviolis. All rights reserved.`,'footer.legal':`Legal notice`,'footer.privacy':`Privacy policy`,
+    '_title':`VIVA RAVIOLIS — Chinese Restaurant · Dumplings & Sichuan Cuisine · Paris 9th`,'_desc':`VIVA RAVIOLIS, Chinese restaurant in the heart of Paris 9th. Homemade dumplings, dim sum, Sichuan specialties. Dine-in, takeaway & delivery. 57 rue du Faubourg Montmartre.`
+  },
+  zh:{
+    'nav.gallery':`图片`,'nav.menu':`菜单`,'nav.about':`关于`,'nav.infos':`信息`,'nav.contact':`联系`,'nav.book':`订座`,
+    'hero.eyebrow':`中餐厅 · 巴黎九区`,'hero.sub':`手工饺子、点心与四川风味，坐落于蒙马特郊区街中心`,'hero.cta1':`浏览菜单`,'hero.cta2':`预订餐桌`,'hero.scroll':`向下滑动 ↓`,
+    'strip.k1':`谷歌评分`,'strip.v1':`★ 4.7 / 5 · 336 条评价`,'strip.k2':`特色`,'strip.v2':`饺子与川菜`,'strip.k3':`地址`,'strip.k4':`服务`,'strip.v4':`堂食 · 外带 · 外送`,
+    'gallery.eyebrow':`美食图片`,'gallery.title':`招牌菜品`,'gallery.lead':`探索我们的招牌菜品，每一道都讲述着手工饺子与四川风味的故事。`,
+    'menu.eyebrow':`招牌菜品`,'menu.title':`菜单`,'menu.lead':`精选招牌菜品。<span class="spice">🌶️</span> 表示辣味菜品。完整菜单可在店内及网上查看。`,'menu.note':`菜单不含全部菜品 · 价格为欧元净价，含税与服务费。午市套餐周一至周五供应（11:00–15:00）。`,
+    'about.eyebrow':`关于我们`,'about.title':`远不止饺子`,'about.lead':`手工饺子成就了我们的口碑，而我们的菜单更展开了完整的中华美食——在温馨的餐厅里，与亲友共享一桌丰盛。`,'about.h3':`尽享中华美食的丰富`,'about.p1':`在 <strong>Viva Raviolis</strong>，我们手工制作的饺子与点心——猪肉韭菜、鲜虾、煎饺、叉烧包——只是开始。我们的菜单呈现完整而丰盛的中华料理。`,'about.p2':`<strong>麻辣香锅</strong>、火锅与炖锅、招牌烤鱼、各式热炒、<strong>四川</strong>麻辣特色、汤品、面食与香米饭：一桌欢聚的美味，从清淡到浓辣，人人都能找到心头好。`,'about.sign':`「实在而丰盛的料理，围桌共享。」`,'about.feat1':`菜单菜品`,'about.feat2':`336 条评价`,'about.feat3':`午市与晚市`,'about.badge':`手工制作`,
+    'salle.eyebrow':`欢迎光临`,'salle.title':`我们的餐厅`,'salle.lead':`温馨而欢聚的氛围，坐落于蒙马特郊区街中心——与亲友共享饺子、香锅与火锅的理想之地。`,'salle.badge':`我们的餐厅`,
+    'infos.eyebrow':`实用信息`,'infos.title':`找到我们 & 预订`,'infos.lead':`位于巴黎九区中心，毗邻大林荫道。`,'infos.hours':`营业时间`,'infos.monThu':`周一至周四`,'infos.fri':`周五`,'infos.sat':`周六`,'infos.sun':`周日`,'infos.open7':`每周七天营业，午市与晚市。`,'infos.address':`地址`,'infos.directions':`在谷歌地图查看路线 →`,'infos.metro':`地铁 Grands Boulevards · Le Peletier`,'infos.reservations':`预订`,'infos.reservDesc':`致电预订餐桌：`,'infos.services':`服务`,'infos.tag1':`堂食`,'infos.tag2':`外带`,'infos.tag3':`外送`,
+    'cta.title':`预订餐桌`,'cta.sub':`来在欢乐的氛围中，共享手工饺子与四川风味。`,'cta.book':`订座`,
+    'footer.desc':`中餐厅 · 手工饺子、点心与川菜，坐落于巴黎九区中心。地道、丰盛而温馨的料理。`,'footer.contact':`联系方式`,'footer.nav':`导航`,'footer.access':`信息与交通`,'footer.rights':`© 2026 Viva Raviolis. 版权所有。`,'footer.legal':`法律声明`,'footer.privacy':`隐私政策`,
+    '_title':`VIVA RAVIOLIS — 中餐厅 · 饺子与川菜 · 巴黎九区`,'_desc':`VIVA RAVIOLIS，位于巴黎九区中心的中餐厅。手工饺子、点心、四川特色。堂食、外带与外送。57 rue du Faubourg Montmartre。`
+  }
+};
+
+function applyLang(lang){
+  if(!SUPPORTED.includes(lang)) lang='fr';
+  LANG=lang;
+  try{localStorage.setItem('vr_lang',lang);}catch(e){}
+  const dict=I18N[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const k=el.getAttribute('data-i18n');
+    if(dict[k]!=null) el.innerHTML=dict[k];
+  });
+  document.documentElement.lang = lang==='zh'?'zh-Hans':lang;
+  if(dict['_title']) document.title=dict['_title'];
+  const md=document.querySelector('meta[name="description"]');
+  if(md&&dict['_desc']) md.setAttribute('content',dict['_desc']);
+  document.querySelectorAll('#langSwitch button,#mobileLang button').forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));
+  renderMenu();
+}
+document.querySelectorAll('#langSwitch button,#mobileLang button').forEach(b=>{
+  b.addEventListener('click',()=>applyLang(b.dataset.lang));
+});
+applyLang(LANG);
 </script>
 </body>
 </html>
