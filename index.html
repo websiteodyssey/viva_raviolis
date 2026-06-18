@@ -252,7 +252,14 @@ footer ul a:hover{color:var(--gold-soft)}
   .map-wrap{margin-top:16px}
   .map-wrap iframe{height:200px}
   .dish-name .dish-meta{display:block;margin-top:3px;white-space:normal}
-  .foot-grid{grid-template-columns:1fr;gap:30px}
+  footer{padding:34px 0 18px}
+  .foot-grid{grid-template-columns:1fr;gap:20px;text-align:center;margin-bottom:18px}
+  .foot-grid>div:last-child{display:none}
+  footer .logo{justify-content:center;margin-bottom:8px}
+  footer p{font-size:.8rem;line-height:1.6;max-width:320px;margin:0 auto}
+  footer h5{margin-bottom:8px;font-size:11px}
+  footer ul li{margin-bottom:7px;font-size:.88rem}
+  .foot-bottom{font-size:.7rem;line-height:1.7;padding-top:14px}
   .strip{padding:20px 0}
   .strip .container{grid-template-columns:repeat(2,1fr);gap:16px 12px}
   .strip .item .k{font-size:10px;letter-spacing:1.5px;margin-bottom:3px}
@@ -414,11 +421,13 @@ footer ul a:hover{color:var(--gold-soft)}
           <p style="margin-top:10px;font-size:.82rem" data-i18n="infos.open7">Ouvert 7j/7, midi et soir.</p>
         </div>
         <div class="info-card">
-          <div class="ic">📍</div>
-          <h4 data-i18n="infos.address">Adresse</h4>
-          <p>57 rue du Faubourg Montmartre<br>75009 Paris</p>
-          <p style="margin-top:10px"><a href="https://www.google.com/maps?q=57+Rue+du+Faubourg+Montmartre+75009+Paris" target="_blank" rel="noopener" data-i18n="infos.directions">Itinéraire Google Maps →</a></p>
-          <p style="font-size:.82rem;margin-top:8px" data-i18n="infos.metro">M° Grands Boulevards · Le Peletier</p>
+          <div class="ic">🥡</div>
+          <h4 data-i18n="infos.services">Services</h4>
+          <div class="tags">
+            <span class="tag" data-i18n="infos.tag1">Sur place</span>
+            <span class="tag" data-i18n="infos.tag2">À emporter</span>
+            <span class="tag" data-i18n="infos.tag3">Livraison</span>
+          </div>
         </div>
         <div class="info-card">
           <div class="ic">☎</div>
@@ -427,13 +436,10 @@ footer ul a:hover{color:var(--gold-soft)}
           <p style="margin-top:8px"><a href="tel:+33177195573" style="font-size:1.2rem">01 77 19 55 73</a></p>
         </div>
         <div class="info-card">
-          <div class="ic">🥡</div>
-          <h4 data-i18n="infos.services">Services</h4>
-          <div class="tags">
-            <span class="tag" data-i18n="infos.tag1">Sur place</span>
-            <span class="tag" data-i18n="infos.tag2">À emporter</span>
-            <span class="tag" data-i18n="infos.tag3">Livraison</span>
-          </div>
+          <div class="ic">📍</div>
+          <h4 data-i18n="infos.address">Adresse</h4>
+          <p>57 rue du Faubourg Montmartre<br>75009 Paris</p>
+          <p style="font-size:.82rem;margin-top:10px" data-i18n="infos.metro">Métro Grands Boulevards · Le Peletier</p>
         </div>
       </div>
       <div class="map-wrap reveal">
@@ -867,7 +873,7 @@ const I18N={
     'menu.eyebrow':`Nos plats`,'menu.title':`La carte`,'menu.lead':`Une sélection de nos spécialités. <span class="spice">🌶️</span> indique les plats épicés. Carte complète disponible sur place et en ligne.`,'menu.note':`Carte non exhaustive · Prix nets en euros, taxes et service compris. Menus déjeuner servis du lundi au vendredi (11h–15h).`,
     'about.eyebrow':`À propos de nous`,'about.title':`Bien plus que des raviolis`,'about.lead':`Si nos raviolis faits maison ont fait notre réputation, notre carte déploie tout le répertoire de la cuisine chinoise — une table généreuse à partager dans une salle chaleureuse.`,'about.h3':`Toute la richesse de la cuisine chinoise`,'about.p1':`Chez <strong>Viva Raviolis</strong>, nos raviolis et dim sum faits maison — porc et ciboulette, crevettes royales, gyoza, bao laqués — ne sont que le début. Notre carte déploie une cuisine chinoise complète et généreuse.`,'about.p2':`Woks <strong>Mala Xiang Guo</strong>, fondues et hot pots à partager, poissons grillés signature, plats sautés, spécialités épicées du <strong>Sichuan</strong>, soupes, nouilles et riz parfumés : une table conviviale où chacun trouve son bonheur, du plus doux au plus relevé.`,'about.sign':`« Une cuisine franche et généreuse, à partager autour de la table. »`,'about.feat1':`Plats à la carte`,'about.feat2':`336 avis`,'about.feat3':`Midi & soir`,'about.badge':`Faits maison`,
     'salle.eyebrow':`Bienvenue chez nous`,'salle.title':`Notre salle`,'salle.lead':`Une atmosphère chaleureuse et conviviale, au cœur du Faubourg Montmartre — l'endroit idéal pour partager raviolis, woks et fondues, entre amis ou en famille.`,'salle.badge':`Notre salle`,
-    'infos.eyebrow':`Informations pratiques`,'infos.title':`Nous trouver & réserver`,'infos.lead':`Au cœur du 9ᵉ arrondissement, à deux pas des Grands Boulevards.`,'infos.hours':`Horaires`,'infos.monThu':`Lundi – Jeudi`,'infos.fri':`Vendredi`,'infos.sat':`Samedi`,'infos.sun':`Dimanche`,'infos.open7':`Ouvert 7j/7, midi et soir.`,'infos.address':`Adresse`,'infos.directions':`Itinéraire Google Maps →`,'infos.metro':`M° Grands Boulevards · Le Peletier`,'infos.reservations':`Réservations`,'infos.reservDesc':`Réservez votre table par téléphone :`,'infos.services':`Services`,'infos.tag1':`Sur place`,'infos.tag2':`À emporter`,'infos.tag3':`Livraison`,
+    'infos.eyebrow':`Informations pratiques`,'infos.title':`Nous trouver & réserver`,'infos.lead':`Au cœur du 9ᵉ arrondissement, à deux pas des Grands Boulevards.`,'infos.hours':`Horaires`,'infos.monThu':`Lundi – Jeudi`,'infos.fri':`Vendredi`,'infos.sat':`Samedi`,'infos.sun':`Dimanche`,'infos.open7':`Ouvert 7j/7, midi et soir.`,'infos.address':`Adresse`,'infos.metro':`Métro Grands Boulevards · Le Peletier`,'infos.reservations':`Réservations`,'infos.reservDesc':`Réservez votre table par téléphone :`,'infos.services':`Services`,'infos.tag1':`Sur place`,'infos.tag2':`À emporter`,'infos.tag3':`Livraison`,
     'cta.title':`Réservez votre table`,'cta.sub':`Venez partager raviolis maison et spécialités du Sichuan dans une ambiance conviviale.`,'cta.book':`Réserver`,
     'footer.desc':`Restaurant chinois · Raviolis maison, dim sum & cuisine du Sichuan, au cœur de Paris 9ᵉ. Une cuisine authentique, généreuse et conviviale.`,'footer.contact':`Coordonnées`,'footer.nav':`Navigation`,'footer.access':`Infos & accès`,'footer.rights':`© 2026 Viva Raviolis. Tous droits réservés.`,'footer.legal':`Mentions légales`,'footer.privacy':`Politique de confidentialité`,
     '_title':`VIVA RAVIOLIS — Restaurant Chinois · Raviolis & Cuisine du Sichuan · Paris 9e`,'_desc':`VIVA RAVIOLIS, restaurant chinois au cœur de Paris 9e. Raviolis maison, dim sum, spécialités du Sichuan. Sur place, à emporter & livraison. 57 rue du Faubourg Montmartre.`
@@ -880,7 +886,7 @@ const I18N={
     'menu.eyebrow':`Our dishes`,'menu.title':`The menu`,'menu.lead':`A selection of our specialties. <span class="spice">🌶️</span> marks spicy dishes. Full menu available in the restaurant and online.`,'menu.note':`Non-exhaustive menu · Net prices in euros, taxes and service included. Lunch sets served Monday to Friday (11am–3pm).`,
     'about.eyebrow':`About us`,'about.title':`Much more than dumplings`,'about.lead':`While our homemade dumplings built our reputation, our menu unfolds the whole repertoire of Chinese cuisine — a generous table to share in a warm dining room.`,'about.h3':`All the richness of Chinese cuisine`,'about.p1':`At <strong>Viva Raviolis</strong>, our homemade dumplings and dim sum — pork & chives, king prawns, gyoza, glazed bao — are only the beginning. Our menu unfolds a complete and generous Chinese cuisine.`,'about.p2':`<strong>Mala Xiang Guo</strong> woks, hot pots to share, signature grilled fish, stir-fries, spicy <strong>Sichuan</strong> specialties, soups, noodles and fragrant rice: a convivial table where everyone finds their favorite, from the mildest to the boldest.`,'about.sign':`“Honest, generous cooking, to share around the table.”`,'about.feat1':`Dishes on the menu`,'about.feat2':`336 reviews`,'about.feat3':`Lunch & dinner`,'about.badge':`Homemade`,
     'salle.eyebrow':`Welcome`,'salle.title':`Our dining room`,'salle.lead':`A warm and convivial atmosphere in the heart of Faubourg Montmartre — the perfect place to share dumplings, woks and hot pots, with friends or family.`,'salle.badge':`Our dining room`,
-    'infos.eyebrow':`Practical information`,'infos.title':`Find us & book`,'infos.lead':`In the heart of the 9th arrondissement, steps from the Grands Boulevards.`,'infos.hours':`Opening hours`,'infos.monThu':`Mon – Thu`,'infos.fri':`Friday`,'infos.sat':`Saturday`,'infos.sun':`Sunday`,'infos.open7':`Open 7 days a week, lunch and dinner.`,'infos.address':`Address`,'infos.directions':`Directions on Google Maps →`,'infos.metro':`Metro Grands Boulevards · Le Peletier`,'infos.reservations':`Reservations`,'infos.reservDesc':`Book your table by phone:`,'infos.services':`Services`,'infos.tag1':`Dine-in`,'infos.tag2':`Takeaway`,'infos.tag3':`Delivery`,
+    'infos.eyebrow':`Practical information`,'infos.title':`Find us & book`,'infos.lead':`In the heart of the 9th arrondissement, steps from the Grands Boulevards.`,'infos.hours':`Opening hours`,'infos.monThu':`Mon – Thu`,'infos.fri':`Friday`,'infos.sat':`Saturday`,'infos.sun':`Sunday`,'infos.open7':`Open 7 days a week, lunch and dinner.`,'infos.address':`Address`,'infos.metro':`Metro Grands Boulevards · Le Peletier`,'infos.reservations':`Reservations`,'infos.reservDesc':`Book your table by phone:`,'infos.services':`Services`,'infos.tag1':`Dine-in`,'infos.tag2':`Takeaway`,'infos.tag3':`Delivery`,
     'cta.title':`Book your table`,'cta.sub':`Come share homemade dumplings and Sichuan specialties in a friendly atmosphere.`,'cta.book':`Book`,
     'footer.desc':`Chinese restaurant · Homemade dumplings, dim sum & Sichuan cuisine, in the heart of Paris 9th. Authentic, generous and convivial cooking.`,'footer.contact':`Contact`,'footer.nav':`Navigation`,'footer.access':`Info & access`,'footer.rights':`© 2026 Viva Raviolis. All rights reserved.`,'footer.legal':`Legal notice`,'footer.privacy':`Privacy policy`,
     '_title':`VIVA RAVIOLIS — Chinese Restaurant · Dumplings & Sichuan Cuisine · Paris 9th`,'_desc':`VIVA RAVIOLIS, Chinese restaurant in the heart of Paris 9th. Homemade dumplings, dim sum, Sichuan specialties. Dine-in, takeaway & delivery. 57 rue du Faubourg Montmartre.`
@@ -893,7 +899,7 @@ const I18N={
     'menu.eyebrow':`招牌菜品`,'menu.title':`菜单`,'menu.lead':`精选招牌菜品。<span class="spice">🌶️</span> 表示辣味菜品。完整菜单可在店内及网上查看。`,'menu.note':`菜单不含全部菜品 · 价格为欧元净价，含税与服务费。午市套餐周一至周五供应（11:00–15:00）。`,
     'about.eyebrow':`关于我们`,'about.title':`远不止饺子`,'about.lead':`手工饺子成就了我们的口碑，而我们的菜单更展开了完整的中华美食——在温馨的餐厅里，与亲友共享一桌丰盛。`,'about.h3':`尽享中华美食的丰富`,'about.p1':`在 <strong>Viva Raviolis</strong>，我们手工制作的饺子与点心——猪肉韭菜、鲜虾、煎饺、叉烧包——只是开始。我们的菜单呈现完整而丰盛的中华料理。`,'about.p2':`<strong>麻辣香锅</strong>、火锅与炖锅、招牌烤鱼、各式热炒、<strong>四川</strong>麻辣特色、汤品、面食与香米饭：一桌欢聚的美味，从清淡到浓辣，人人都能找到心头好。`,'about.sign':`「实在而丰盛的料理，围桌共享。」`,'about.feat1':`菜单菜品`,'about.feat2':`336 条评价`,'about.feat3':`午市与晚市`,'about.badge':`手工制作`,
     'salle.eyebrow':`欢迎光临`,'salle.title':`我们的餐厅`,'salle.lead':`温馨而欢聚的氛围，坐落于蒙马特郊区街中心——与亲友共享饺子、香锅与火锅的理想之地。`,'salle.badge':`我们的餐厅`,
-    'infos.eyebrow':`实用信息`,'infos.title':`找到我们 & 预订`,'infos.lead':`位于巴黎九区中心，毗邻大林荫道。`,'infos.hours':`营业时间`,'infos.monThu':`周一至周四`,'infos.fri':`周五`,'infos.sat':`周六`,'infos.sun':`周日`,'infos.open7':`每周七天营业，午市与晚市。`,'infos.address':`地址`,'infos.directions':`在谷歌地图查看路线 →`,'infos.metro':`地铁 Grands Boulevards · Le Peletier`,'infos.reservations':`预订`,'infos.reservDesc':`致电预订餐桌：`,'infos.services':`服务`,'infos.tag1':`堂食`,'infos.tag2':`外带`,'infos.tag3':`外送`,
+    'infos.eyebrow':`实用信息`,'infos.title':`找到我们 & 预订`,'infos.lead':`位于巴黎九区中心，毗邻大林荫道。`,'infos.hours':`营业时间`,'infos.monThu':`周一至周四`,'infos.fri':`周五`,'infos.sat':`周六`,'infos.sun':`周日`,'infos.open7':`每周七天营业，午市与晚市。`,'infos.address':`地址`,'infos.metro':`地铁 Grands Boulevards · Le Peletier`,'infos.reservations':`预订`,'infos.reservDesc':`致电预订餐桌：`,'infos.services':`服务`,'infos.tag1':`堂食`,'infos.tag2':`外带`,'infos.tag3':`外送`,
     'cta.title':`预订餐桌`,'cta.sub':`来在欢乐的氛围中，共享手工饺子与四川风味。`,'cta.book':`订座`,
     'footer.desc':`中餐厅 · 手工饺子、点心与川菜，坐落于巴黎九区中心。地道、丰盛而温馨的料理。`,'footer.contact':`联系方式`,'footer.nav':`导航`,'footer.access':`信息与交通`,'footer.rights':`© 2026 Viva Raviolis. 版权所有。`,'footer.legal':`法律声明`,'footer.privacy':`隐私政策`,
     '_title':`VIVA RAVIOLIS — 中餐厅 · 饺子与川菜 · 巴黎九区`,'_desc':`VIVA RAVIOLIS，位于巴黎九区中心的中餐厅。手工饺子、点心、四川特色。堂食、外带与外送。57 rue du Faubourg Montmartre。`
